@@ -72,16 +72,16 @@ body {
 	background-image:url("images/horseriderdown.png");
 }
 
-.jumpup {
+.fencejumpup {
 	background-image:url("images/fencejumpup.png");
 }
-.jumpright {
+.fencejumpright {
 	background-image:url("images/fencejumpright.png");
 }
-.jumpleft {
+.fencejumpleft {
 	background-image:url("images/fencejumpleft.png");
 }
-.jumpdown {
+.fencejumpdown {
 	background-image:url("images/fencejumpdown.png");
 }
 
@@ -98,6 +98,22 @@ body {
 	background-image:url("images/enemydown.png");
 }
 
-.bridge{
+.bridge {
 	background-color:#734500 !important;
+}
+
+.message {
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color:rgba(0, 0, 0, 0.8);
+	color:white;
+	font-family:Verdana,san-serif;
+	font-size:8em;
+	vertical-align:top;
+	text-align:center;
+	line-height:100vh;
 }
