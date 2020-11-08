@@ -5,7 +5,7 @@ const levels = [
 	 "flag", "water", "animate", "animate", "animate",
 	 "fenceside", "tree", "", "", "",
 	 "", "fenceup", "", "", "",
-	 "", "fenceup", "", "", "horseup"],
+	 "rock", "fenceup", "", "", "horseup"],
 	
 	//level 1
 	["flag", "water", "", "tree", "rock",
@@ -102,59 +102,58 @@ function tryToMove(direction) {
 	if(!riderOn && nextClass.includes("fence")) { return; }
 	
 	//if there is a fence, move two spaces with animation
-	if(nextClass.includes("fence")) {
+	if(nextClass.includes("fence")) {			
+			
+		//set values according to direction
+		if (direction == "left") {
+			nextClass = "fencejumpleft";
+			nextClass2 = "horseriderleft";
+			nextLocation2 = nextLocation - 1;
+		} else if (direction == "right") {
+			nextClass = "fencejumpright";
+			nextClass2 = "horseriderright";
+			nextLocation2 = nextLocation + 1;
+		} else if (direction == "up") {
+			nextClass = "fencejumpup";
+			nextClass2 = "horseriderup";
+			nextLocation2 = nextLocation - widthOfBoard;
+		} else if (direction == "down") {
+			nextClass = "fencejumpdown";
+			nextClass2 = "horseriderdown";
+			nextLocation2 = nextLocation + widthOfBoard;
+		}//if
 		
-		//rider must be on to jump
-		if(riderOn){
-
-			//reset class name of current location
-			gridBoxes[currentLocationOfHorse].className = ""; //possible bug for bridge
-			oldClassName = gridBoxes[nextLocation].className;
-			
-			//set values according to direction
-			if (direction == "left") {
-				nextClass = "fencejumpleft";
-				nextClass2 = "horseriderleft";
-				nextLocation2 = nextLocation - 1;
-			} else if (direction == "right") {
-				nextClass = "fencejumpright";
-				nextClass2 = "horseriderright";
-				nextLocation2 = nextLocation + 1;
-			} else if (direction == "up") {
-				nextClass = "fencejumpup";
-				nextClass2 = "horseriderup";
-				nextLocation2 = nextLocation - widthOfBoard;
-			} else if (direction == "down") {
-				nextClass = "fencejumpdown";
-				nextClass2 = "horseriderdown";
-				nextLocation2 = nextLocation + widthOfBoard;
-			}//if
-			
-			//show horse jumping
-			gridBoxes[nextLocation].className = nextClass;
-			setTimeout(function() {
-				
-				//set jump back to just a fence
-				gridBoxes[nextLocation].className = oldClassName;
-				
-				//update current location of horse to be 2 spaces past take off
-				currentLocationOfHorse = nextLocation2;
-				
-				//get class of box after jump
-				nextClass = gridBoxes[currentLocationOfHorse].className;
-				//check if obstacle after jump **
-				
-				//show rider and horse after landing
-				gridBoxes[currentLocationOfHorse].className = nextClass2;
-				
-				//if next box is a flag, go up a level
-				levelUp(nextClass);
-				
-			}, 350);
+		//if there is an obstacle behind the fence, do nothing
+		if(noPassObstacles.includes(gridBoxes[nextLocation2].className)) {
 			return;
+		}//if
+
+		//reset class name of current location
+		gridBoxes[currentLocationOfHorse].className = ""; //possible bug for bridge
+		oldClassName = gridBoxes[nextLocation].className;
+
+		//show horse jumping
+		gridBoxes[nextLocation].className = nextClass;
+		setTimeout(function() {
 			
-		}//if riderOn
-		
+			//set jump back to just a fence
+			gridBoxes[nextLocation].className = oldClassName;
+			
+			//update current location of horse to be 2 spaces past take off
+			currentLocationOfHorse = nextLocation2;
+			
+			//get class of box after jump
+			nextClass = gridBoxes[currentLocationOfHorse].className;
+			
+			//show rider and horse after landing
+			gridBoxes[currentLocationOfHorse].className = nextClass2;
+			
+			//if next box is a flag, go up a level
+			levelUp(nextClass);
+			
+		}, 350);
+		return;
+			
 	}//if class has fence
 	
 	//if there is a rider, add rider
@@ -247,6 +246,11 @@ function animateEnemy(boxes, index, direction){
 			boxes[i].classList.remove("enemyright");
 		}//if
 	}//for
+
+	if(boxes[index].className.includes("horse")){
+		document.getElementById("lose").style.display = "block";
+		return;
+	}
 
 	//moving right
 	if (direction == "right") {
