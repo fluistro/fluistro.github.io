@@ -195,6 +195,10 @@ function tryToMove(direction) {
 //move up a level
 function levelUp(nextClass) {
 	if (nextClass == "flag" && riderOn) {
+		if(currentLevel == levels.length - 1) {
+			document.getElementById("win").style.display = "block";
+			return;
+		}//if
 		document.getElementById("levelup").style.display = "block";
 		clearTimeout(currentAnimation);
 		setTimeout (function() {
