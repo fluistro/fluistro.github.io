@@ -94,7 +94,7 @@ function tryToMove(direction) {
 	}//switch
 	
 	nextClass = gridBoxes[nextLocation].className;
-	
+
 	//if the obstacle is not passable, don't move
 	if(noPassObstacles.includes(nextClass)) { return; }
 	
@@ -102,8 +102,15 @@ function tryToMove(direction) {
 	if(!riderOn && nextClass.includes("fence")) { return; }
 	
 	//if there is a fence, move two spaces with animation
-	if(nextClass.includes("fence")) {			
-			
+	if(nextClass.includes("fence")) {
+
+		//if the player tries to jump over a fence from the side, don't move
+		if(nextClass == "fenceside" && (direction == "left" || direction == "right")) {
+			return;
+		} else if(nextClass == "fenceup" && (direction == "up" || direction == "down")) {
+			return;
+		}//if
+
 		//set values according to direction
 		if (direction == "left") {
 			nextClass = "fencejumpleft";
@@ -195,10 +202,13 @@ function tryToMove(direction) {
 //move up a level
 function levelUp(nextClass) {
 	if (nextClass == "flag" && riderOn) {
+
+		//end game if last level is completed
 		if(currentLevel == levels.length - 1) {
 			document.getElementById("win").style.display = "block";
 			return;
 		}//if
+
 		document.getElementById("levelup").style.display = "block";
 		clearTimeout(currentAnimation);
 		setTimeout (function() {
