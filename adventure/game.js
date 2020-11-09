@@ -117,99 +117,96 @@ function tryToMove(direction) {
 	// if there is a fence, move two spaces with animation
 	if (nextClass.includes("fence")) {
 		
-		if (jumpOn) {
-			gridBoxes[currentLocationOfHorse].className = "";
-			oldClassName = gridBoxes[nextLocation].className;
-			
-			// if the horse isn't jumping in the right direction, don't move
-			if ((direction == "left" || direction == "right") && nextClass.includes("side")) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-				console.log(newClass + currentLocationOfHorse);
-				return;
-			} else if ((direction == "up" || direction == "down") && nextClass.includes("up")) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-				console.log(newClass + currentLocationOfHorse + gridBoxes[currentLocationOfHorse].classList);
-				return;
-			} // else if
-			
-			// set values according to direction
-			if (direction == "left" && nextClass.includes("up")) {
-				nextClass = "jumpleft";
-				nextClass2 = "horseriderleft";
-				nextLocation2 = nextLocation - 1;
-				if (nextLocation % widthOfBoard == 0) {
-					gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-					return;
-				} // if
-			} else if (direction == "right" && nextClass.includes("up")) {
-				nextClass = "jumpright";
-				nextClass2 = "horseriderright";
-				nextLocation2 = nextLocation + 1;
-				if (nextLocation % widthOfBoard == widthOfBoard - 1) {
-					gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-					return;
-				} // if
-			} else if (direction == "up" && nextClass.includes("side")) {
-				nextClass = "jumpup";
-				nextClass2 = "horseriderup";
-				nextLocation2 = nextLocation - widthOfBoard;
-				if (nextLocation - widthOfBoard < 0) {
-					gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-					return;
-				} // if
-			} else if (direction == "down" && nextClass.includes("side")) {
-				nextClass = "jumpdown";
-				nextClass2 = "horseriderdown";
-				nextLocation2 = nextLocation + widthOfBoard;
-				if (nextLocation + widthOfBoard >= widthOfBoard * widthOfBoard) {
-					gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-					return;
-				} // if
-			}
-			
-			// if there is an impassible object, don't move
-			if (noPassObstacles.includes(gridBoxes[nextLocation2].className)) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-				return;
-			} // if	
+		gridBoxes[currentLocationOfHorse].className = "";
+		oldClassName = gridBoxes[nextLocation].className;
 
-			// if there is an impassible object, don't move
-			if (gridBoxes[nextLocation2].className.includes("fence")) {
+		// if the horse isn't jumping in the right direction, don't move
+		if ((direction == "left" || direction == "right") && nextClass.includes("side")) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+			console.log(newClass + currentLocationOfHorse);
+			return;
+		} else if ((direction == "up" || direction == "down") && nextClass.includes("up")) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+			console.log(newClass + currentLocationOfHorse + gridBoxes[currentLocationOfHorse].classList);
+			return;
+		} // else if
+
+		// set values according to direction
+		if (direction == "left" && nextClass.includes("up")) {
+			nextClass = "jumpleft";
+			nextClass2 = "horseriderleft";
+			nextLocation2 = nextLocation - 1;
+			if (nextLocation % widthOfBoard == 0) {
 				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
 				return;
-			} // if				
-			
-			// show horse jumping
-			gridBoxes[nextLocation].className = nextClass;
-			
-			// disables eventListener
-			window.removeEventListener("keydown" , getKey);
-			
-			setTimeout(function () {
-				
-				// set jump back to just a fence
-				gridBoxes[nextLocation].className = oldClassName;
-				
-				// update current location of horse to be two spaces past take off
-				currentLocationOfHorse = nextLocation2;
-				
-				// get class of box after jump
-				nextClass = gridBoxes[currentLocationOfHorse].className;
-				
-				// show horse and rider after landing
-				gridBoxes[currentLocationOfHorse].className = nextClass2;
-				
-				// if next box is a flag, go up a level
-				levelUp(nextClass);
-				
-				// re-enables eventListener
-				window.addEventListener("keydown" , getKey);
-				
-			} , 350);
-			
-			
+			} // if
+		} else if (direction == "right" && nextClass.includes("up")) {
+			nextClass = "jumpright";
+			nextClass2 = "horseriderright";
+			nextLocation2 = nextLocation + 1;
+			if (nextLocation % widthOfBoard == widthOfBoard - 1) {
+				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				return;
+			} // if
+		} else if (direction == "up" && nextClass.includes("side")) {
+			nextClass = "jumpup";
+			nextClass2 = "horseriderup";
+			nextLocation2 = nextLocation - widthOfBoard;
+			if (nextLocation - widthOfBoard < 0) {
+				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				return;
+			} // if
+		} else if (direction == "down" && nextClass.includes("side")) {
+			nextClass = "jumpdown";
+			nextClass2 = "horseriderdown";
+			nextLocation2 = nextLocation + widthOfBoard;
+			if (nextLocation + widthOfBoard >= widthOfBoard * widthOfBoard) {
+				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				return;
+			} // if
+		}
+
+		// if there is an impassible object, don't move
+		if (noPassObstacles.includes(gridBoxes[nextLocation2].className)) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
 			return;
-		} // if riderOn
+		} // if	
+
+		// if there is an impassible object, don't move
+		if (gridBoxes[nextLocation2].className.includes("fence")) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+			return;
+		} // if				
+
+		// show horse jumping
+		gridBoxes[nextLocation].className = nextClass;
+
+		// disables eventListener
+		window.removeEventListener("keydown" , getKey);
+
+		setTimeout(function () {
+
+			// set jump back to just a fence
+			gridBoxes[nextLocation].className = oldClassName;
+
+			// update current location of horse to be two spaces past take off
+			currentLocationOfHorse = nextLocation2;
+
+			// get class of box after jump
+			nextClass = gridBoxes[currentLocationOfHorse].className;
+
+			// show horse and rider after landing
+			gridBoxes[currentLocationOfHorse].className = nextClass2;
+
+			// if next box is a flag, go up a level
+			levelUp(nextClass);
+
+			// re-enables eventListener
+			window.addEventListener("keydown" , getKey);
+
+		} , 350);
+
+		return;
 		
 	} // if class has fence
 	
