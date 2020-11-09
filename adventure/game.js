@@ -108,6 +108,8 @@ function tryToMove(direction) {
 	
 	nextClass = gridBoxes[nextLocation].className;
 	
+	if (noPassObstacles.includes(nextClass)){ return; }
+	
 	//if the obstacle is not passable, don't move
 	if (!waterOn && nextClass == "water") { return; }
 	
