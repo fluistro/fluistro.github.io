@@ -386,7 +386,7 @@ function moveRock (direction , rockLocation) {
 		rockLocation --;
 		
 		// show new rock
-		gridBoxes[rockLocation - 1].className = "rock";
+		gridBoxes[rockLocation].className = "rock";
 	} // if
 	
 	// right
