@@ -117,6 +117,18 @@ body {
 	background-color:#800020 !important;
 }
 
+.hatjump {
+	background-image:url("images/hatjump.png");
+}
+
+.hatwater {
+	background-image:url("images/hatwater.png");
+}
+
+.hatstrength {
+	background-image:url("images/hatstrength.png");
+}
+
 .message {
 	display:none;
 	position:fixed;
