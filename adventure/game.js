@@ -33,6 +33,8 @@ const gridBoxes = document.querySelectorAll("#gameBoard div");
 const noPassObstacles = ["rock" , "tree" , "water"];
 var currentLevel = 0;	// starting level
 var jumpOn = false; // is the rider on?
+var waterOn = false;
+var strengthOn = false;
 var currentLocationOfHorse = 0;
 var currentAnimation;	// allows 1 animation per level
 var widthOfBoard = 7;
@@ -214,6 +216,10 @@ function tryToMove(direction) {
 	// if there is a rider, add rider
 	if (nextClass == "hatjump") {
 		jumpOn = true;
+	} else if (nextClass == "hatwater") {
+		waterOn = true;
+	} else if (nextClass == "hatstrength") {
+		strengthOn = true;
 	} // if
 	
 	// if there is a bridge in the old location, keep it
@@ -270,6 +276,8 @@ function loadLevel() {
 	let levelMap = levels[currentLevel];
 	let animateBoxes;
 	jumpOn = false;
+	waterOn = false;
+	strengthOn = false;
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
