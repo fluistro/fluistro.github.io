@@ -1,7 +1,7 @@
 const levels =  [
 
 		// level 0
-		["flag" , "rock" , "" , "" , "" , "", "",
+		["flag" , "rock" , "" , "" , "" , "", "hatjump",
 		 "fenceside" , "rock" , "" ,"" , "rider" , "", "",
 		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
 		 "" , "water" , "" , "" , "" , "", "",
@@ -213,6 +213,10 @@ function tryToMove(direction) {
 	
 	// if there is a rider, add rider
 	if (nextClass == "rider") {
+		riderOn = true;
+	} // if
+	
+	if (nextClass == "hatjump") {
 		riderOn = true;
 	} // if
 	
