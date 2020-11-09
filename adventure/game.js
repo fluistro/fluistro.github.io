@@ -1,11 +1,11 @@
 const levels =  [
 
 		// level 0
-		["flag" , "rock" , "" , "" , "" , "hatwater", "hatjump",
-		 "fenceside" , "rock" , "" ,"" , "" , "", "",
+		["flag" , "tree" , "" , "" , "hatstrength" , "hatwater", "hatjump",
+		 "fenceside" , "tree" , "" ,"" , "" , "", "",
 		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
 		 "" , "water" , "" , "" , "" , "", "",
-		 "" , "fenceup" , "" , "horseup" , "", "", "",
+		 "" , "fenceup" , "" , "horseup" , "", "rock", "",
 		 "", "", "", "", "", "", "",
 		 "", "", "", "", "", "", ""
 		],
@@ -116,6 +116,8 @@ function tryToMove(direction) {
 	// if it's a fence, and there is no rider, don't move
 	if (!jumpOn && nextClass.includes("fence")) { return; }
 	
+	if(!strengthOn && nextClass.includes("rock")) { return; }
+	
 	// if there is a fence, move two spaces with animation
 	if (nextClass.includes("fence")) {
 		
@@ -210,7 +212,11 @@ function tryToMove(direction) {
 
 		return;
 		
-	} // if class has fence
+	}
+	
+	if (nextClass == "rock") {
+		moveRock(direction , nextLocation);	
+	} // if
 	
 	if (nextClass == "water") {
 		nextClass == "";
@@ -361,3 +367,83 @@ function animateEnemy(boxes , index , direction) {
 	} , 750);
 	
 } // animateEnemy
+
+function moveRock (direction , rockLocation) {
+	
+	// left
+	if (direction == "left") {
+		
+		// if out of bounds, don't move
+		if (rockLocation % widthOfBoard == 0) { return; }
+		
+		// if the next location of the rock is an impassable object, don't move
+		if (gridBoxes[rockLocation - 1].includes("tree") || gridBoxes[rockLocation - 1].includes("water") || gridBoxes[rockLocation - 1].includes("fence") || gridBoxes[rockLocation - 1].includes("flag")) { return; }
+		
+		// remove old rock
+		gridBoxes[rockLocation].className = "";
+		
+		// update location of rock
+		rockLocation --;
+		
+		// show new rock
+		gridBoxes[rockLocation - 1].className = "rock";
+	} // if
+	
+	// right
+	if (direction == "right") {
+		
+		// if out of bounds, don't move
+		if (rockLocation % widthOfBoard == widthOfBoard - 1) { return; }
+		
+		// if the next location of the rock is an impassable object, don't move
+		if (gridBoxes[rockLocation + 1].includes("tree") || gridBoxes[rockLocation + 1].includes("water") || gridBoxes[rockLocation + 1].includes("fence") || gridBoxes[rockLocation + 1].includes("flag")) { return; }
+		
+		// remove old rock
+		gridBoxes[rockLocation].className = "";
+		
+		// update location of rock
+		rockLocation ++;
+		
+		// show new rock
+		gridBoxes[rockLocation].className = "rock";
+	} // if
+	
+	// up
+	if (direction == "up") {
+		
+		// if out of bounds, don't move
+		if (currentLocationOfHorse - widthOfBoard >= 0) { return; }
+		
+		// if the next location of the rock is an impassable object, don't move
+		if (gridBoxes[rockLocation + widthOfBoard].includes("tree") || gridBoxes[rockLocation + widthOfBoard].includes("water") || gridBoxes[rockLocation + widthOfBoard].includes("fence") || gridBoxes[rockLocation + widthOfBoard].includes("flag")) { return; }
+		
+		// remove old rock
+		gridBoxes[rockLocation].className = "";
+		
+		// update location of rock
+		rockLocation += widthOfBoard;
+		
+		// show new rock
+		gridBoxes[rockLocation].className = "rock";
+	} // if
+	
+	// down
+	if (direction == "up") {
+		
+		// if out of bounds, don't move
+		if (currentLocationOfHorse + widthOfBoard <= widthOfBoard * widthOfBoard) { return; }
+		
+		// if the next location of the rock is an impassable object, don't move
+		if (gridBoxes[rockLocation - widthOfBoard].includes("tree") || gridBoxes[rockLocation - widthOfBoard].includes("water") || gridBoxes[rockLocation - widthOfBoard].includes("fence") || gridBoxes[rockLocation - widthOfBoard].includes("flag")) { return; }
+		
+		// remove old rock
+		gridBoxes[rockLocation].className = "";
+		
+		// update location of rock
+		rockLocation -= widthOfBoard;
+		
+		// show new rock
+		gridBoxes[rockLocation].className = "rock";
+	} // if
+	
+} // moveRock	
