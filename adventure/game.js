@@ -2,7 +2,7 @@ const levels =  [
 
 		// level 0
 		["flag" , "rock" , "" , "" , "" , "", "hatjump",
-		 "fenceside" , "rock" , "" ,"" , "rider" , "", "",
+		 "fenceside" , "rock" , "" ,"" , "" , "", "",
 		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
 		 "" , "water" , "" , "" , "" , "", "",
 		 "" , "fenceup" , "" , "horseup" , "", "", "",
@@ -10,7 +10,7 @@ const levels =  [
 		 "", "", "", "", "", "", ""
 		],
 		//level 1
-		["flag" , "tree" , "" , "rider" , "" , "", "",
+		["flag" , "tree" , "" , "" , "" , "", "",
 		 "" , "rock" , "" ,"water" , "" , "", "",
 		 "fenceside" , "animate" , "animate" , "animate bridge" , "animate" , "", "",
 		 "" , "water" , "" , "water" , "" , "", "",
@@ -23,7 +23,7 @@ const levels =  [
 		 "" , "" , "fenceup" ,"" , "fenceup" , "", "",
 		 "fenceup" , "" , "" , "fenceside" , "fenceup" , "", "",
 		 "fenceup" , "" , "" , "" , "fenceup" , "", "",
-		 "fenceup" , "" , "horseup" , "rider" , "fenceup", "", "",
+		 "fenceup" , "" , "horseup" , "" , "fenceup", "", "",
 		 "", "", "", "", "", "", "",
 		 "", "", "", "", "", "", ""
 		]
@@ -32,7 +32,7 @@ const levels =  [
 const gridBoxes = document.querySelectorAll("#gameBoard div");
 const noPassObstacles = ["rock" , "tree" , "water"];
 var currentLevel = 0;	// starting level
-var riderOn = false; // is the rider on?
+var jumpOn = false; // is the rider on?
 var currentLocationOfHorse = 0;
 var currentAnimation;	// allows 1 animation per level
 var widthOfBoard = 7;
@@ -110,12 +110,12 @@ function tryToMove(direction) {
 	if (noPassObstacles.includes(nextClass)) { return; }
 	
 	// if it's a fence, and there is no rider, don't move
-	if (!riderOn && nextClass.includes("fence")) { return; }
+	if (!jumpOn && nextClass.includes("fence")) { return; }
 	
 	// if there is a fence, move two spaces with animation
 	if (nextClass.includes("fence")) {
 		
-		if (riderOn) {
+		if (jumpOn) {
 			gridBoxes[currentLocationOfHorse].className = "";
 			oldClassName = gridBoxes[nextLocation].className;
 			
@@ -212,12 +212,8 @@ function tryToMove(direction) {
 	} // if class has fence
 	
 	// if there is a rider, add rider
-	if (nextClass == "rider") {
-		riderOn = true;
-	} // if
-	
 	if (nextClass == "hatjump") {
-		riderOn = true;
+		jumpOn = true;
 	} // if
 	
 	// if there is a bridge in the old location, keep it
@@ -228,7 +224,7 @@ function tryToMove(direction) {
 	} // else
 	
 	// build name of new class 
-	newClass = (riderOn) ? "horserider" : "horse";
+	newClass = (jumpOn) ? "horserider" : "horse";
 	newClass += direction;
 	
 	// if there is a bridge in the next location, keep it
@@ -254,7 +250,7 @@ function tryToMove(direction) {
 
 // move up a level
 function levelUp(nextClass) {
-	if(nextClass == "flag" && riderOn) {
+	if(nextClass == "flag" && jumpOn) {
 		document.getElementById("levelup").style.display = "block";
 		clearTimeout(currentAnimation);
 		setTimeout(function () {
@@ -273,7 +269,7 @@ function levelUp(nextClass) {
 function loadLevel() {
 	let levelMap = levels[currentLevel];
 	let animateBoxes;
-	riderOn = false;
+	jumpOn = false;
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
