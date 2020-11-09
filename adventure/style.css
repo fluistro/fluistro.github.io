@@ -5,8 +5,8 @@ body {
 #gameBoard {
 	border: 1px solid black;
 	display: grid;
-	grid-template-columns: 120px 120px 120px 120px 120px;
-	grid-template-rows: 120px 120px 120px 120px 120px;
+	grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+	grid-template-rows: 100px 100px 100px 100px 100px 100px 100px;
 	justify-content:center;
 	width:600px;
 	height:600px;
