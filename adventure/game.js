@@ -1,25 +1,31 @@
 const levels =  [
 
 		// level 0
-		["flag" , "rock" , "" , "" , "" ,
-		 "fenceside" , "rock" , "" ,"" , "rider" ,
-		 "" , "tree" , "animate" , "animate" , "animate" , 
-		 "" , "water" , "" , "" , "" , 
-		 "" , "fenceup" , "" , "horseup" , "" 
+		["flag" , "rock" , "" , "" , "" , "", "",
+		 "fenceside" , "rock" , "" ,"" , "rider" , "", "",
+		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
+		 "" , "water" , "" , "" , "" , "", "",
+		 "" , "fenceup" , "" , "horseup" , "", "", "",
+		 "", "", "", "", "", "", "",
+		 "", "", "", "", "", "", ""
 		],
 		//level 1
-		["flag" , "tree" , "" , "rider" , "" ,
-		 "" , "rock" , "" ,"water" , "" ,
-		 "fenceside" , "animate" , "animate" , "animate bridge" , "animate" , 
-		 "" , "water" , "" , "water" , "" , 
-		 "" , "" , "" , "water" , "horseup" 
+		["flag" , "tree" , "" , "rider" , "" , "", "",
+		 "" , "rock" , "" ,"water" , "" , "", "",
+		 "fenceside" , "animate" , "animate" , "animate bridge" , "animate" , "", "",
+		 "" , "water" , "" , "water" , "" , "", "",
+		 "" , "" , "" , "water" , "horseup", "", "",
+		 "", "", "", "", "", "", "",
+		 "", "", "", "", "", "", ""
 		],
 		//level 2
-		["fenceup" , "fenceside" , "fenceside" , "fenceside" , "fenceside" ,
-		 "" , "" , "fenceup" ,"" , "fenceup" ,
-		 "fenceup" , "" , "" , "fenceside" , "fenceup" , 
-		 "fenceup" , "" , "" , "" , "fenceup" , 
-		 "fenceup" , "" , "horseup" , "rider" , "fenceup" 
+		["fenceup" , "fenceside" , "fenceside" , "fenceside" , "fenceside" , "", "",
+		 "" , "" , "fenceup" ,"" , "fenceup" , "", "",
+		 "fenceup" , "" , "" , "fenceside" , "fenceup" , "", "",
+		 "fenceup" , "" , "" , "" , "fenceup" , "", "",
+		 "fenceup" , "" , "horseup" , "rider" , "fenceup", "", "",
+		 "", "", "", "", "", "", "",
+		 "", "", "", "", "", "", ""
 		]
 		]; // end of levels
 
