@@ -1,7 +1,7 @@
 const levels =  [
 
 		// level 0
-		["flag" , "rock" , "" , "" , "" , "", "hatjump",
+		["flag" , "rock" , "" , "" , "" , "hatwater", "hatjump",
 		 "fenceside" , "rock" , "" ,"" , "" , "", "",
 		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
 		 "" , "water" , "" , "" , "" , "", "",
