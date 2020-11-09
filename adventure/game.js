@@ -30,7 +30,7 @@ const levels =  [
 		]; // end of levels
 
 const gridBoxes = document.querySelectorAll("#gameBoard div");
-const noPassObstacles = ["rock" , "tree" , "water"];
+const noPassObstacles = ["rock" , "tree"];
 var currentLevel = 0;	// starting level
 var jumpOn = false; // is the rider on?
 var waterOn = false;
@@ -109,7 +109,7 @@ function tryToMove(direction) {
 	nextClass = gridBoxes[nextLocation].className;
 	
 	//if the obstacle is not passable, don't move
-	if (noPassObstacles.includes(nextClass)) { return; }
+	if (!waterOn && nextClass == "water") { return; }
 	
 	// if it's a fence, and there is no rider, don't move
 	if (!jumpOn && nextClass.includes("fence")) { return; }
@@ -210,13 +210,24 @@ function tryToMove(direction) {
 		
 	} // if class has fence
 	
+	if (nextClass == "water") {
+		nextClass == "";
+		//show animation here
+	}//if
+	
 	// if there is a rider, add rider
 	if (nextClass == "hatjump") {
 		jumpOn = true;
+		waterOn = false;
+		strengthOn = false;
 	} else if (nextClass == "hatwater") {
 		waterOn = true;
+		jumpOn = false;
+		strengthOn = false;
 	} else if (nextClass == "hatstrength") {
 		strengthOn = true;
+		waterOn = false;
+		jumpOn = false;
 	} // if
 	
 	// if there is a bridge in the old location, keep it
