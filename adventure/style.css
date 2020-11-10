@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
+
 body {
 	background-color:black;
 }
 
 #gameBoard {
 	border: 1px solid black;
-	display: grid;
+	
 	grid-template-columns: 120px 120px 120px 120px 120px 120px 120px;
 	grid-template-rows: 120px 120px 120px 120px 120px 120px 120px;
 	justify-content:center;
@@ -13,12 +15,29 @@ body {
 	
 	margin-left:auto;
 	margin-right:auto;
+	z-index:1;
 }
 
 #gameBoard div{
 	background-color:#00EE00;
 	background-repeat:no-repeat;
 	background-size:cover;
+	z-index:1;
+}
+
+#menu{
+	font-family: 'Syne Tactile', cursive;
+	color:white;
+	font-size:69px;
+}
+
+#levelup{
+	z-index:10;
+}
+
+button{
+	height:30px;
+	width:50px;
 }
 
 .rider {
@@ -90,19 +109,19 @@ body {
 }
 
 .jumpup {
-	background-image:url("images/jumpup.png");
+	background-image:url("images/fencejumpup.png");
 }
 
 .jumpleft {
-	background-image:url("images/jumpleft.png");
+	background-image:url("images/fencejumpleft.png");
 }
 
 .jumpright {
-	background-image:url("images/jumpright.png");
+	background-image:url("images/fencejumpright.png");
 }
 
 .jumpdown {
-	background-image:url("images/jumpdown.png");
+	background-image:url("images/fencejumpdown.png");
 }
 
 .enemyup {
@@ -139,11 +158,6 @@ body {
 
 .message {
 	display:none;
-	position:fixed;
-	top:0px;
-	left:0px;
-	width:100%;
-	height:100%;
 	background-color:rgba(0,0,0,0.8);
 	color:white;
 	font-family:Verdana,sans-serif;
@@ -151,5 +165,9 @@ body {
 	vertical-align:top;
 	text-align:center;
 	line-height:100vh;
+	z-index:6;
 }
 
+.hidden {
+	display:none;
+}
