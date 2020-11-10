@@ -2,54 +2,90 @@
   <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sam and Luca's Adventure</title>
+    <title>Sam Li and Luca Jones' Adventure</title>
     
     <!-- include an external style sheet -->
-    <link rel="stylesheet" href="adventure.css">  
+    <link rel="stylesheet" href="style.css">  
     
-    <!-- include an external JavaScript file -->
-    <script src="adventure.js"></script>
+    
   </head>
   
   <body>
-    <div id="gameBoard">
+  
+		<div id="menu" class="hidden">
+			<h1 id="title">Title</h1>
+			<button onclick="showInstructions()">Instructions</button>
+			<button onclick="startGame()">Start</button>
+		</div>
+		<div id="instructions" class="hidden">
+			<p>Instructions</p>
+			<button onclick="showMenu()">Return</button>
+		</div>
+		<div class="hidden" id="gameBoard" >
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<button onclick="showMenu()">Return</button>
+		</div>
+		
+		<div class="hidden" id="lose">You Lose</div>
+		<div class="hidden" id="levelup">Next Level ...</div>
 	
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  <div></div>
-	  
-	</div>
-	
-	<div class="message" id="lose">You Lose</div>
-	<div class="message" id="levelup">Next Level...</div>
-	<div class="message" id="win">You Win!</div>
-	
+		<!-- include an external JavaScript file -->
+		<script src="game.js"></script>
   </body>
   
 </html>
