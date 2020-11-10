@@ -108,15 +108,57 @@ function tryToMove(direction) {
 	
 	nextClass = gridBoxes[nextLocation].className;
 	
-	if (noPassObstacles.includes(nextClass)){ return; }
+	if (noPassObstacles.includes(nextClass)){ 
+		// makes sure the right character is displayed when hitting an inpassable object
+		if(waterOn){
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else if (jumpOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+		} else if (strengthOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} // else
+		return; 
+	} // if
 	
 	//if the obstacle is not passable, don't move
-	if (!waterOn && nextClass == "water") { return; }
+	if (!waterOn && nextClass == "water") { 
+		// makes sure the right character is displayed when hitting an inpassable object
+		if (jumpOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+		} else if (strengthOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} // else
+		return; 
+	} // if
 	
 	// if it's a fence, and there is no rider, don't move
-	if (!jumpOn && nextClass.includes("fence")) { return; }
+	if (!jumpOn && nextClass.includes("fence")) { 
+		// makes sure the right character is displayed when hitting an inpassable object
+		if(waterOn){
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else if (strengthOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} // else
+		return;
+	} // if
 	
-	if(!strengthOn && nextClass.includes("rock")) { return; }
+	if(!strengthOn && nextClass.includes("rock")) { 
+	// makes sure the right character is displayed when hitting an inpassable object
+		if(waterOn){
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} else if (jumpOn) {
+			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+		} else {
+			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+		} // else
+		return;  
+	} // if
 	
 	// if there is a fence, move two spaces with animation
 	if (nextClass.includes("fence")) {
@@ -181,6 +223,18 @@ function tryToMove(direction) {
 			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
 			return;
 		} // if				
+		
+		// if there is an impassible object, don't move
+		if (gridBoxes[nextLocation2].className.includes("water")) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+			return;
+		} // if		
+		
+		// if there is an impassible object, don't move
+		if (gridBoxes[nextLocation2].className.includes("rock")) {
+			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+			return;
+		} // if		
 
 		// show horse jumping
 		gridBoxes[nextLocation].className = nextClass;
@@ -376,13 +430,26 @@ function moveRock (direction , rockLocation) {
 	if (direction == "left") {
 		
 		// if out of bounds, don't move
-		if (rockLocation % widthOfBoard == 0) { return; }
+		if (rockLocation % widthOfBoard == 0) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - 1].className.includes("tree") || gridBoxes[rockLocation - 1].className.includes("water") || gridBoxes[rockLocation - 1].className.includes("fence") || gridBoxes[rockLocation - 1].className.includes("flag")) { console.log("impassible"); return; }
+		if (gridBoxes[rockLocation - 1].className.includes("tree") || gridBoxes[rockLocation - 1].className.includes("water") || gridBoxes[rockLocation - 1].className.includes("fence") || gridBoxes[rockLocation - 1].className.includes("flag")) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			console.log("impassible"); 
+			return; 
+		} // if
 		
-		// remove old rock
-		gridBoxes[rockLocation].className = "";
+		// remove the old horse
+		gridBoxes[currentLocationOfHorse].className = "";
+		
+		// update the location of the horse
+		currentLocationOfHorse --;
+		
+		// remove old rock and replace it with the horse
+		gridBoxes[rockLocation].className = "horse" + direction;
 		
 		// update location of rock
 		rockLocation --;
@@ -395,13 +462,25 @@ function moveRock (direction , rockLocation) {
 	if (direction == "right") {
 		
 		// if out of bounds, don't move
-		if (rockLocation % widthOfBoard == widthOfBoard - 1) { return; }
+		if (rockLocation % widthOfBoard == widthOfBoard - 1) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + 1].className.includes("tree") || gridBoxes[rockLocation + 1].className.includes("water") || gridBoxes[rockLocation + 1].className.includes("fence") || gridBoxes[rockLocation + 1].className.includes("flag")){ return; }
+		if (gridBoxes[rockLocation + 1].className.includes("tree") || gridBoxes[rockLocation + 1].className.includes("water") || gridBoxes[rockLocation + 1].className.includes("fence") || gridBoxes[rockLocation + 1].className.includes("flag")){ 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
-		// remove old rock
-		gridBoxes[rockLocation].className = "";
+		// remove the old horse
+		gridBoxes[currentLocationOfHorse].className = "";
+		
+		// update the location of the horse
+		currentLocationOfHorse ++;
+		
+		// remove old rock and replace it with the horse
+		gridBoxes[rockLocation].className = "horse" + direction;
 		
 		// update location of rock
 		rockLocation ++;
@@ -414,13 +493,25 @@ function moveRock (direction , rockLocation) {
 	if (direction == "up") {
 		
 		// if out of bounds, don't move
-		if (rockLocation - widthOfBoard < 0) { return; }
+		if (rockLocation - widthOfBoard < 0) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { return; }
+		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
-		// remove old rock
-		gridBoxes[rockLocation].className = "";
+		// remove the old horse
+		gridBoxes[currentLocationOfHorse].className = "";
+		
+		// update the location of the horse
+		currentLocationOfHorse -= widthOfBoard;
+		
+		// remove old rock and replace it with the horse
+		gridBoxes[rockLocation].className = "horse" + direction;
 		
 		// update location of rock
 		rockLocation -= widthOfBoard;
@@ -433,13 +524,25 @@ function moveRock (direction , rockLocation) {
 	if (direction == "down") {
 		
 		// if out of bounds, don't move
-		if (rockLocation + widthOfBoard >= widthOfBoard * widthOfBoard) { return; }
+		if (rockLocation + widthOfBoard >= widthOfBoard * widthOfBoard) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { return; }
+		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { 
+			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			return; 
+		} // if
 		
-		// remove old rock
-		gridBoxes[rockLocation].className = "";
+		// remove the old horse
+		gridBoxes[currentLocationOfHorse].className = "";
+		
+		// update the location of the horse
+		currentLocationOfHorse += widthOfBoard;
+		
+		// remove old rock and replace it with the horse
+		gridBoxes[rockLocation].className = "horse" + direction;
 		
 		// update location of rock
 		rockLocation += widthOfBoard;
