@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
+
+body {
+	background-color:black;
+}
+
+#gameBoard {
+	border: 1px solid black;
+	
+	grid-template-columns: 120px 120px 120px 120px 120px 120px 120px;
+	grid-template-rows: 120px 120px 120px 120px 120px 120px 120px;
+	justify-content:center;
+	width:840px;
+	height:840px;
+	
+	margin-left:auto;
+	margin-right:auto;
+	z-index:1;
+}
+
+#gameBoard div{
+	background-color:#00EE00;
+	background-repeat:no-repeat;
+	background-size:cover;
+	z-index:1;
+}
+
+#menu{
+	font-family: 'Syne Tactile', cursive;
+	color:white;
+	font-size:69px;
+}
+
+#levelup{
+	z-index:10;
+}
+
+button{
+	height:30px;
+	width:50px;
+}
+
+.rider {
+	background-image:url("images/rider.png");
+}
+
+.tree {
+	background-image:url("images/tree.png");
+}
+
+.flag {
+	background-image:url("images/flag.png");
+}
+
+.rock {
+	background-image:url("images/rock.png");
+}
+
+.fenceup {
+	background-image:url("images/fenceup.png");
+}
+
+.fenceside {
+	background-image:url("images/fenceside.png");
+}
+
+.water {
+	background-image:url("images/water.png");
+}
+
+.watermedium {
+	background-image:url("images/watermedium.png");
+}
+
+.watersmall {
+	background-image:url("images/watersmall.png");
+}
+
+.horseup {
+	background-image:url("images/horseup.png");
+}
+
+.horseleft {
+	background-image:url("images/horseleft.png");
+}
+
+.horseright {
+	background-image:url("images/horseright.png");
+}
+
+.horsedown {
+	background-image:url("images/horsedown.png");
+}
+
+.horseriderup{
+	background-image:url("images/horseriderup.png");
+}
+
+.horseriderleft {
+	background-image:url("images/horseriderleft.png");
+}
+
+.horseriderright {
+	background-image:url("images/horseriderright.png");
+}
+
+.horseriderdown {
+	background-image:url("images/horseriderdown.png");
+}
+
+.jumpup {
+	background-image:url("images/fencejumpup.png");
+}
+
+.jumpleft {
+	background-image:url("images/fencejumpleft.png");
+}
+
+.jumpright {
+	background-image:url("images/fencejumpright.png");
+}
+
+.jumpdown {
+	background-image:url("images/fencejumpdown.png");
+}
+
+.enemyup {
+	background-image:url("images/enemyup.png");
+}
+
+.enemyleft {
+	background-image:url("images/enemyleft.png");
+}
+
+.enemyright {
+	background-image:url("images/enemyright.png");
+}
+
+.enemydown {
+	background-image:url("images/enemydown.png");
+}
+
+.bridge {
+	background-color:#800020 !important;
+}
+
+.hatjump {
+	background-image:url("images/hatjump.png");
+}
+
+.hatwater {
+	background-image:url("images/hatwater.png");
+}
+
+.hatstrength {
+	background-image:url("images/hatstrength.png");
+}
+
+.message {
+	display:none;
+	background-color:rgba(0,0,0,0.8);
+	color:white;
+	font-family:Verdana,sans-serif;
+	font-size:8em;
+	vertical-align:top;
+	text-align:center;
+	line-height:100vh;
+	z-index:6;
+}
+
+.hidden {
+	display:none;
+}
