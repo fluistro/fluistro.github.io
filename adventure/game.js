@@ -16,7 +16,7 @@ const levels =  [
 		 "" , "water" , "" , "water" , "" , "", "",
 		 "" , "" , "" , "water" , "horseup", "", "",
 		 "", "", "", "", "", "", "",
-		 "", "", "", "", "", "", ""
+		 "", "", "", "", "hatjump", "", ""
 		],
 		//level 2
 		["fenceup" , "fenceside" , "fenceside" , "fenceside" , "fenceside" , "", "",
@@ -25,7 +25,16 @@ const levels =  [
 		 "fenceup" , "" , "" , "" , "fenceup" , "", "",
 		 "fenceup" , "" , "horseup" , "" , "fenceup", "", "",
 		 "", "", "", "", "", "", "",
-		 "", "", "", "", "", "", ""
+		 "", "", "", "flag", "hatjump", "", ""
+		],
+		//level 3
+		["tree" , "tree" , "tree" , "tree" , "tree" , "tree", "tree",
+		 "tree" , "tree" , "tree" ,"tree" , "tree" , "tree", "flag",
+		 "tree" , "tree" , "tree" , "hatjump" , "tree" , "tree" , "fenceside",
+		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate",
+		 "" , "tree" , "" , "tree" , "" , "tree" , "",
+		 "" , "tree" , "" , "tree" , "" , "tree" , "",
+		 "" , "" , "" , "horseup" , "" , "" , ""
 		]
 		]; // end of levels
 
