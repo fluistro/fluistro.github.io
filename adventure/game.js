@@ -50,7 +50,7 @@ var widthOfBoard = 7;
 
 // start game
 window.addEventListener("load" , function () {
-	loadLevel();
+	showMenu();
 });
 
 // move horse
@@ -355,6 +355,7 @@ function tryToMove(direction) {
 	// if it is an enemy
 	if (nextClass.includes("enemy")) {
 		document.getElementById("lose").style.display = "block";
+		document.getElementById("gameBoard").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
 		return;
 	} // if
@@ -368,9 +369,11 @@ function tryToMove(direction) {
 function levelUp(nextClass) {
 	if(nextClass == "flag") {
 		document.getElementById("levelup").style.display = "block";
+		document.getElementById("gameBoard").style.display = "none";
 		clearTimeout(currentAnimation);
 		setTimeout(function () {
 			document.getElementById("levelup").style.display = "none";
+			document.getElementById("gameBoard").style.display = "grid";
 			currentLevel++;
 			if(currentLevel == levels.length){
 				console.log("you beat the game");
@@ -380,7 +383,16 @@ function levelUp(nextClass) {
 		} , 1000);
 	} // if
 } // levelUp
+
+function startGame() {
+	currentLevel = 0;
+	document.getElementById("menu").style.display = "none";
+	//show story here
 	
+	//load level
+	window.addEventListener("keydown", loadLevel());
+}//startGame
+
 // load levels 0 - maxlevel
 function loadLevel() {
 	let levelMap = levels[currentLevel];
@@ -388,6 +400,8 @@ function loadLevel() {
 	jumpOn = false;
 	waterOn = false;
 	strengthOn = false;
+	
+	document.getElementById("gameBoard").style.display = "grid";
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
@@ -401,9 +415,23 @@ function loadLevel() {
 	animateBoxes = document.querySelectorAll(".animate");
 	animateEnemy(animateBoxes , 0 , "right");
 	
-} // loadLevel
+} //startGame
 
-// animate enenmy left to right (could add up and down to this)
+//show menu
+function showMenu() {
+	document.getElementById("instructions").style.display = "none";
+	document.getElementById("gameBoard").style.display = "none";
+	document.getElementById("menu").style.display = "block";
+	window.clearTimeout(currentAnimation);
+}//showMenu
+
+//show instructions
+function showInstructions() {
+	document.getElementById("menu").style.display = "none";
+	document.getElementById("instructions").style.display = "block";
+}//showInstructions
+
+// animate enemy left to right (could add up and down to this)
 // boxes - array of grid boxes that include animation
 // index - current location of animation
 // direction - current direction of animation 
@@ -429,6 +457,7 @@ function animateEnemy(boxes , index , direction) {
 	
 	if (boxes[index].className.includes("horse")) {
 		document.getElementById("lose").style.display = "block";
+		document.getElementById("gameBoard").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
 		return;
 	} // if
@@ -593,4 +622,4 @@ function moveRock (direction , rockLocation) {
 		gridBoxes[rockLocation].className = "rock";
 	} // if
 	
-} // moveRock	
+} // moveRock
