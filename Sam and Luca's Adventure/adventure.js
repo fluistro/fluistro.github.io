@@ -14,6 +14,16 @@ const levels = [
 	 "", "water", "animate", "animate", "animate",
 	 "horseup", "water", "", "", ""]
 	
+	//level 2
+	["tree" , "tree" , "tree" , "tree" , "tree" ,
+	 "tree" , "tree" , "tree" ,"tree" , "flag" ,
+	 "tree" , "tree" , "rider" , "tree" , "fenceside",
+	 "animate" , "animate" , "animate" , "animate" , "animate" ,
+	 "" , "tree" , "" , "tree" , "" , 
+	 "" , "tree" , "" , "tree" , "" , 
+	 "" , "" , "" , "horseup" , ""
+	]
+	
 	]; //end of levels
 
 const noPassObstacles = ["rock", "tree", "water"];
