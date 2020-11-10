@@ -49,6 +49,14 @@ body {
 	background-image:url("images/water.png");
 }
 
+.watermedium {
+	background-image:url("images/watermedium.png");
+}
+
+.watersmall {
+	background-image:url("images/watersmall.png");
+}
+
 .horseup {
 	background-image:url("images/horseup.png");
 }

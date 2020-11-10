@@ -118,6 +118,7 @@ function tryToMove(direction) {
 	nextClass = gridBoxes[nextLocation].className;
 	
 	if (noPassObstacles.includes(nextClass)){ 
+	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
 			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
@@ -133,6 +134,7 @@ function tryToMove(direction) {
 	
 	//if the obstacle is not passable, don't move
 	if (!waterOn && nextClass == "water") { 
+	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if (jumpOn) {
 			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
@@ -146,6 +148,7 @@ function tryToMove(direction) {
 	
 	// if it's a fence, and there is no rider, don't move
 	if (!jumpOn && nextClass.includes("fence")) { 
+	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
 			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
@@ -158,7 +161,8 @@ function tryToMove(direction) {
 	} // if
 	
 	if(!strengthOn && nextClass.includes("rock")) { 
-	// makes sure the right character is displayed when hitting an inpassable object
+	
+		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
 			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
 		} else if (jumpOn) {
@@ -275,7 +279,7 @@ function tryToMove(direction) {
 
 		return;
 		
-	}
+	} // if there's a fence
 	
 	if (nextClass == "rock") {
 		moveRock(direction , nextLocation);
@@ -283,8 +287,34 @@ function tryToMove(direction) {
 	} // if
 	
 	if (nextClass == "water") {
-		nextClass == "";
+		
+		// disables eventListener
+		window.removeEventListener("keydown" , getKey);
+		
 		//show animation here
+		setTimeout ( function () {
+			
+			// show the medium fire
+			gridBoxes[nextLocation].className = "watermedium";
+			
+		} , 350);
+		setTimeout ( function () {
+			
+			// show the small fire
+			gridBoxes[nextLocation].className = "watersmall";
+			
+		} , 700);
+		setTimeout ( function () {
+			
+			// remove the fire entirely
+			gridBoxes[nextLocation].className = "";
+		
+			// re-enables eventListener
+			window.addEventListener("keydown" , getKey);
+		} , 1050);
+		
+		return;
+		
 	}//if
 	
 	// if there is a rider, add rider
@@ -336,7 +366,7 @@ function tryToMove(direction) {
 
 // move up a level
 function levelUp(nextClass) {
-	if(nextClass == "flag" && jumpOn) {
+	if(nextClass == "flag") {
 		document.getElementById("levelup").style.display = "block";
 		clearTimeout(currentAnimation);
 		setTimeout(function () {
@@ -479,6 +509,7 @@ function moveRock (direction , rockLocation) {
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation + 1].className.includes("tree") || gridBoxes[rockLocation + 1].className.includes("water") || gridBoxes[rockLocation + 1].className.includes("fence") || gridBoxes[rockLocation + 1].className.includes("flag")){ 
 			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			console.log("impassible"); 
 			return; 
 		} // if
 		
@@ -508,8 +539,9 @@ function moveRock (direction , rockLocation) {
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { 
+		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { 
 			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			console.log("impassible"); 
 			return; 
 		} // if
 		
@@ -539,8 +571,9 @@ function moveRock (direction , rockLocation) {
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { 
+		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { 
 			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			console.log("impassible"); 
 			return; 
 		} // if
 		
