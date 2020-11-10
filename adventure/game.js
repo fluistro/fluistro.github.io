@@ -379,7 +379,7 @@ function moveRock (direction , rockLocation) {
 		if (rockLocation % widthOfBoard == 0) { return; }
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - 1].includes("tree") || gridBoxes[rockLocation - 1].includes("water") || gridBoxes[rockLocation - 1].includes("fence") || gridBoxes[rockLocation - 1].includes("flag")) { console.log("impassible"); return; }
+		if (gridBoxes[rockLocation - 1].className.includes("tree") || gridBoxes[rockLocation - 1].className.includes("water") || gridBoxes[rockLocation - 1].className.includes("fence") || gridBoxes[rockLocation - 1].className.includes("flag")) { console.log("impassible"); return; }
 		
 		// remove old rock
 		gridBoxes[rockLocation].className = "";
@@ -398,7 +398,7 @@ function moveRock (direction , rockLocation) {
 		if (rockLocation % widthOfBoard == widthOfBoard - 1) { return; }
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + 1].includes("tree") || gridBoxes[rockLocation + 1].includes("water") || gridBoxes[rockLocation + 1].includes("fence") || gridBoxes[rockLocation + 1].includes("flag")){ return; }
+		if (gridBoxes[rockLocation + 1].className.includes("tree") || gridBoxes[rockLocation + 1].className.includes("water") || gridBoxes[rockLocation + 1].className.includes("fence") || gridBoxes[rockLocation + 1].className.includes("flag")){ return; }
 		
 		// remove old rock
 		gridBoxes[rockLocation].className = "";
@@ -417,7 +417,7 @@ function moveRock (direction , rockLocation) {
 		if (rockLocation - widthOfBoard < 0) { return; }
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + widthOfBoard].includes("tree") || gridBoxes[rockLocation + widthOfBoard].includes("water") || gridBoxes[rockLocation + widthOfBoard].includes("fence") || gridBoxes[rockLocation + widthOfBoard].includes("flag")) { return; }
+		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { return; }
 		
 		// remove old rock
 		gridBoxes[rockLocation].className = "";
@@ -436,7 +436,7 @@ function moveRock (direction , rockLocation) {
 		if (rockLocation + widthOfBoard >= widthOfBoard * widthOfBoard) { return; }
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - widthOfBoard].includes("tree") || gridBoxes[rockLocation - widthOfBoard].includes("water") || gridBoxes[rockLocation - widthOfBoard].includes("fence") || gridBoxes[rockLocation - widthOfBoard].includes("flag")) { return; }
+		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { return; }
 		
 		// remove old rock
 		gridBoxes[rockLocation].className = "";
