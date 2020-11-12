@@ -1,33 +1,6 @@
 const levels =  [
 
-		// level 0
-		["flag" , "tree" , "" , "" , "hatstrength" , "hatwater", "hatjump",
-		 "fenceside" , "tree" , "" ,"" , "" , "", "",
-		 "" , "tree" , "animate" , "animate" , "animate" , "", "",
-		 "" , "water" , "" , "" , "" , "", "",
-		 "" , "fenceup" , "" , "horseup" , "", "rock", "",
-		 "", "", "", "", "", "", "",
-		 "", "", "", "", "", "", ""
-		],
-		//level 1
-		["flag" , "tree" , "" , "" , "" , "", "",
-		 "" , "rock" , "" ,"water" , "" , "", "",
-		 "fenceside" , "animate" , "animate" , "animate bridge" , "animate" , "", "",
-		 "" , "water" , "" , "water" , "" , "", "",
-		 "" , "" , "" , "water" , "horseup", "", "",
-		 "", "", "", "", "", "", "",
-		 "", "", "", "", "hatjump", "", ""
-		],
-		//level 2
-		["fenceup" , "fenceside" , "fenceside" , "fenceside" , "fenceside" , "", "",
-		 "" , "" , "fenceup" ,"" , "fenceup" , "", "",
-		 "fenceup" , "" , "" , "fenceside" , "fenceup" , "", "",
-		 "fenceup" , "" , "" , "" , "fenceup" , "", "",
-		 "fenceup" , "" , "horseup" , "" , "fenceup", "", "",
-		 "", "", "", "", "", "", "",
-		 "", "", "", "flag", "hatjump", "", ""
-		],
-		//level 3
+		//level 0
 		["tree" , "tree" , "tree" , "tree" , "tree" , "tree", "tree",
 		 "tree" , "tree" , "tree" ,"tree" , "tree" , "tree", "flag",
 		 "tree" , "tree" , "tree" , "hatjump" , "tree" , "tree" , "fenceside",
@@ -35,8 +8,17 @@ const levels =  [
 		 "" , "tree" , "" , "tree" , "" , "tree" , "",
 		 "" , "tree" , "" , "tree" , "" , "tree" , "",
 		 "" , "" , "" , "horseup" , "" , "" , ""
+		],
+		//level 1
+		["" , "" , "" , "" , "" , "horseleft", "tree",
+		 "" , "tree" , "tree" ,"tree" , "tree" , "tree", "tree",
+		 "" , "tree" , "" , "" , "" , "water" , "",
+		 "" , "tree" , "tree" , "flag" , "tree" , "tree" , "",
+		 "" , "tree" , "tree" , "tree" , "tree" , "tree" , "",
+		 "" , "tree" , "tree" , "hatwater" , "tree" , "tree" , "water",
+		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate"
 		]
-		]; // end of levels
+	]; // end of levels
 
 const gridBoxes = document.querySelectorAll("#gameBoard div");
 const noPassObstacles = ["tree"];
@@ -52,9 +34,6 @@ var widthOfBoard = 7;
 window.addEventListener("load" , function () {
 	showMenu();
 });
-
-// move horse
-window.addEventListener("keydown" , getKey); // event listener
 
 // get the key from user
 function getKey(e) {
@@ -76,7 +55,7 @@ function getKey(e) {
 			} // if
 			break;
 		case 40:// down arrow
-			if (currentLocationOfHorse + widthOfBoard <= widthOfBoard * widthOfBoard) {
+			if (currentLocationOfHorse + widthOfBoard < widthOfBoard * widthOfBoard) {
 				tryToMove("down");
 			} // if
 			break;
@@ -288,6 +267,9 @@ function tryToMove(direction) {
 	
 	if (nextClass == "water") {
 		
+		//show orse in right direction
+		gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		
 		// disables eventListener
 		window.removeEventListener("keydown" , getKey);
 		
@@ -317,7 +299,7 @@ function tryToMove(direction) {
 		
 	}//if
 	
-	// if there is a rider, add rider
+	// if there is a hat, add hat
 	if (nextClass == "hatjump") {
 		jumpOn = true;
 		waterOn = false;
@@ -356,8 +338,8 @@ function tryToMove(direction) {
 	if (nextClass.includes("enemy")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
+		document.getElementById("return").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
-		return;
 	} // if
 	
 	// move up to next level if needed
@@ -368,29 +350,37 @@ function tryToMove(direction) {
 // move up a level
 function levelUp(nextClass) {
 	if(nextClass == "flag") {
-		document.getElementById("levelup").style.display = "block";
-		document.getElementById("gameBoard").style.display = "none";
-		clearTimeout(currentAnimation);
-		setTimeout(function () {
-			document.getElementById("levelup").style.display = "none";
-			document.getElementById("gameBoard").style.display = "grid";
-			currentLevel++;
-			if(currentLevel == levels.length){
-				console.log("you beat the game");
-			} else {
+		currentLevel++;
+		if(currentLevel == levels.length){
+		
+			clearTimeout(currentAnimation);
+			showEndscreen();
+		
+		} else {
+			document.getElementById("levelup").style.display = "flex";
+			document.getElementById("gameBoard").style.display = "none";
+			document.getElementById("return").style.display = "none";
+			clearTimeout(currentAnimation);
+			setTimeout(function () {
+				document.getElementById("levelup").style.display = "none";
+				document.getElementById("gameBoard").style.display = "grid";
 				loadLevel();
-			} // else
-		} , 1000);
+			} , 1000);
+			
+		} // else
+		
 	} // if
 } // levelUp
 
 function startGame() {
 	currentLevel = 0;
 	document.getElementById("menu").style.display = "none";
-	//show story here
 	
-	//load level
-	window.addEventListener("keydown", loadLevel());
+	//show story here
+	document.getElementById("story").style.display = "block";
+	document.getElementById("storyimages").style.display = "block";
+	document.getElementById("continue").style.display = "block";
+	
 }//startGame
 
 // load levels 0 - maxlevel
@@ -401,7 +391,11 @@ function loadLevel() {
 	waterOn = false;
 	strengthOn = false;
 	
+	document.getElementById("story").style.display = "none";
+	document.getElementById("storyimages").style.display = "none";
+	document.getElementById("continue").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
+	document.getElementById("return").style.display = "block";
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
@@ -412,15 +406,36 @@ function loadLevel() {
 	
 	} // for
 	
+	// event listener
+	window.addEventListener("keydown" , getKey); 
+	
 	animateBoxes = document.querySelectorAll(".animate");
 	animateEnemy(animateBoxes , 0 , "right");
 	
 } //startGame
 
+function showEndscreen() {
+	
+	document.getElementById("instructions").style.display = "none";
+	document.getElementById("return").style.display = "none";
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("menu").style.display = "none";
+
+	document.getElementById("gameBoard").style.display = "none";
+	document.getElementById("return").style.display = "none";
+	document.getElementById("endscreen").style.display = "block";
+	
+} // showEndscreen
+
 //show menu
 function showMenu() {
+	
+	//hide everything but the menu
 	document.getElementById("instructions").style.display = "none";
 	document.getElementById("gameBoard").style.display = "none";
+	document.getElementById("return").style.display = "none";
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("endscreen").style.display = "none";
 	document.getElementById("menu").style.display = "block";
 	window.clearTimeout(currentAnimation);
 }//showMenu
@@ -429,6 +444,7 @@ function showMenu() {
 function showInstructions() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("instructions").style.display = "block";
+	document.getElementById("return").style.display = "block";	
 }//showInstructions
 
 // animate enemy left to right (could add up and down to this)
@@ -455,11 +471,12 @@ function animateEnemy(boxes , index , direction) {
 		} // if
 	} // for
 	
+	// if the enemy hits you
 	if (boxes[index].className.includes("horse")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
+		document.getElementById("return").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
-		return;
 	} // if
 	
 	// moving right

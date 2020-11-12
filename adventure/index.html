@@ -13,77 +13,125 @@
   <body>
   
 		<div id="menu" class="hidden">
-			<h1 id="title">Title</h1>
+			<h1 id="title">HAT WIZARD</h1>
 			<button onclick="showInstructions()">Instructions</button>
 			<button onclick="startGame()">Start</button>
 		</div>
+		
 		<div id="instructions" class="hidden">
-			<p>Instructions</p>
-			<button onclick="showMenu()">Return</button>
-		</div>
-		<div class="hidden" id="gameBoard" >
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			
-			<button onclick="showMenu()">Return</button>
+			<h1>Instructions</h1>
+			<p>
+			You play as Jospeh the wizard <br>
+			Use the arrow keys to move and get through all of the floors of the tower.<br>
+			If you run into Donald's minions or they run into you, you die. (lose a life?)<br>
+			There are three types of hats scattered throughout the tower :<br>
+			The jump hat allows Joseph to jump over spikes<br>
+			The water hat allows Joseph to put out flames<br>
+			The strength hat allows Joseph to move around bolders<br><br>
+			Be aware: once you take a hat, it's gone. (until you respawn?) <br>
+			In order to proceed to the next floor you must reach the staircase.<br>
+			</p>
 		</div>
 		
-		<div class="message" id="lose">You Lose</div>
-		<div class="message" id="levelup">Next Level ...</div>
-	
+		<div id="instructionsimages" class="hidden">
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+		</div>
+		
+		<div id="story" class="hidden">
+			<p>In the town of hatville, there lives a wizard named Joseph. Joseph is a local hat seller that sells his magical hats
+			to the people for them to use in their everyday lives. Despite being a small business, his shop vastly outperforms the 
+			incredibly large hat company owned by the wizard Donald. Donald's hat company has stores all across the realm, but its
+			headquarters, also known as the Donald Hat Co. tower, are right in the heart of hatville where Joseph's store thrives. 
+			For years, Donald tried to compete with Joseph's popularity, but his efforts were to no avail. He has become so jelous that last night, 
+			he sent his minions to rob Joseph's entire stock, bring the stolen hats to him, and set up obstacles to defend those hats. 
+			However, Donalds minions, being the unintelligent creatures they are, left a trail of hats leading to the headquarters and 
+			even left some of the hats spread across the eadquarter floors. When Joseph awoke this morning to the sight of his ravaged store and the trail of hats, 
+			he followed the trail until he reached the Donald Hat Co. tower. Now knowing who the thief is, Joseph has made it his goal to take back his hats.</p>
+			
+			<button id="continue" onclick="loadLevel()" class="hidden">Continue...</button>
+
+		</div>
+		
+		<div id="storyimages" class="hidden">
+			<img src="images/enemyup.png">
+		</div>
+		
+		<button id="return" onclick="showMenu()">Return To Menu</button>
+		
+		<div class="hidden" id="gameBoard" >
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+		</div>
+		
+		<div class="message" id="lose">
+			<h1>Game Over</h1>
+			<button id="return" onclick="showMenu()">Return To Menu</button>
+		</div>
+		
+		<div class="message" id="levelup">
+			<p>Next Level ...</p>
+		</div>
+		
+		<div class="message" id="endscreen">
+			<h1>THE END</h1>
+			<p>Congratulations! You recovered your stolen hats and saved your shop!</p>
+			<button id="return" onclick="showMenu()">Return To Menu</button>
+		</div>
 		<!-- include an external JavaScript file -->
 		<script src="game.js"></script>
   </body>
