@@ -10,6 +10,7 @@ body {
 	background-size: 12.5% 25%;
 	background-repeat:repeat;
 	overflow:hidden;
+	margin:0px;
 }
 
 #gameBoard {
