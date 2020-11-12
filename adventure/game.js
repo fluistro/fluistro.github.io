@@ -554,6 +554,7 @@ function loadLevel() {
 	document.getElementById("storyimages").style.display = "none";
 	document.getElementById("continue").style.display = "none";
 	document.getElementById("lose").style.display = "none";
+	document.getElementById("levelup").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
 	document.getElementById("returnfromgame").style.display = "block";
 	
