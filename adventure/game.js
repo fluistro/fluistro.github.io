@@ -575,7 +575,7 @@ function loadLevel() {
 	
 } //startGame
 
-//start the game
+//start the game and show story
 function startGame() {
 	currentLevel = 0;
 	document.getElementById("menu").style.display = "none";
@@ -586,6 +586,11 @@ function startGame() {
 	document.getElementById("continue").style.display = "block";
 	
 }//startGame
+
+function restart() {
+	currentLevel = 0;
+	loadLevel();
+}//restart
 
 //show ending screen
 function showEndscreen() {
