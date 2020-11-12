@@ -7,10 +7,10 @@ const levels =  [
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate",
 		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
 		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
-		 "" , "" , "" , "horseup" , "" , "" , ""
+		 "" , "" , "" , "wizardup" , "" , "" , ""
 		],
 		//level 1
-		["" , "" , "" , "" , "" , "horseleft", "pillar",
+		["" , "" , "" , "" , "" , "wizardleft", "pillar",
 		 "" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
 		 "" , "pillar" , "" , "" , "" , "firelarge" , "",
 		 "" , "pillar" , "pillar" , "stairs" , "pillar" , "pillar" , "",
