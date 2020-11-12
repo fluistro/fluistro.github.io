@@ -348,7 +348,7 @@ function animateEnemy(boxes , index , direction) {
 	} // for
 	
 	// if the enemy hits you
-	if (boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) {
+	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
 		document.getElementById("returnfromgame").style.display = "none";
