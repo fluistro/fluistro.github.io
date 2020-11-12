@@ -554,7 +554,7 @@ function loadLevel() {
 	document.getElementById("storyimages").style.display = "none";
 	document.getElementById("continue").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
-	document.getElementsByClassName("returnfromgame").style.display = "block";
+	document.getElementById("returnfromgame").style.display = "block";
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
@@ -616,5 +616,5 @@ function showMenu() {
 function showInstructions() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("instructions").style.display = "block";
-	document.getElementsByClassName("returnfromgame").style.display = "block";	
+	document.getElementById("returnfromgame").style.display = "block";	
 }//showInstructions
