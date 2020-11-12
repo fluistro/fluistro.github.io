@@ -313,8 +313,9 @@ function tryToMove(direction) {
 	// if it is an enemy
 	if (nextClass.includes("enemy")) {
 		document.getElementById("lose").style.display = "block";
+		document.getElementById("returnfromlose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
-		document.getElementsByClassName("return").style.display = "none";
+		document.getElementById("returnfromgame").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
 	} // if
 	
@@ -350,8 +351,9 @@ function animateEnemy(boxes , index , direction) {
 	// if the enemy hits you
 	if (boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) {
 		document.getElementById("lose").style.display = "block";
+		document.getElementById("returnfromlose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
-		document.getElementById("return").style.display = "none";
+		document.getElementById("returnfromgame").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
 	} // if
 	
@@ -554,7 +556,7 @@ function loadLevel() {
 	document.getElementById("storyimages").style.display = "none";
 	document.getElementById("continue").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
-	document.getElementsByClassName("return").style.display = "block";
+	document.getElementsByClassName("returnfromgame").style.display = "block";
 	
 	// load the board
 	for(i = 0; i < gridBoxes.length; i++ ) {
@@ -589,12 +591,12 @@ function startGame() {
 function showEndscreen() {
 	
 	document.getElementById("instructions").style.display = "none";
-	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("returnfromgame").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("menu").style.display = "none";
 
 	document.getElementById("gameBoard").style.display = "none";
-	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("returnfromend").style.display = "none";
 	document.getElementById("endscreen").style.display = "block";
 	
 } // showEndscreen
@@ -605,7 +607,9 @@ function showMenu() {
 	//hide everything but the menu
 	document.getElementById("instructions").style.display = "none";
 	document.getElementById("gameBoard").style.display = "none";
-	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("returnfromgame").style.display = "none";
+	document.getElementById("returnfromend").style.display = "none";
+	document.getElementById("returnfromlose").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("endscreen").style.display = "none";
 	document.getElementById("menu").style.display = "block";
@@ -616,5 +620,5 @@ function showMenu() {
 function showInstructions() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("instructions").style.display = "block";
-	document.getElementsByClassName("return").style.display = "block";	
+	document.getElementsByClassName("returnfromgame").style.display = "block";	
 }//showInstructions
