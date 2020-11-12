@@ -97,6 +97,7 @@ body {
 #returnfromgame{
 	display:block;
 	margin-bottom:15px;
+	margin-top:15px;
 	margin-left:auto;
 	margin-right:auto;
 	justify-content:center;
@@ -117,6 +118,7 @@ body {
 
 #restart{
 	display:block;
+	margin-top:30px;
 	margin-bottom:15px;
 	margin-left:auto;
 	margin-right:auto;

@@ -3,7 +3,7 @@ const levels =  [
 		//level 0
 		["pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar", "pillar",
 		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairs",
-		 "pillar" , "pillar" , "pillar" , "hatjump" , "pillar" , "pillar" , "fenceside",
+		 "pillar" , "pillar" , "pillar" , "hatjump" , "pillar" , "pillar" , "spikes",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate",
 		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
 		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
@@ -357,7 +357,10 @@ function animateEnemy(boxes , index , direction) {
 	} // for
 	
 	// if the enemy hits you
-	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")){
+	if (boxes[index].className.includes("jumpup") || boxes[index].className.includes("jumpdown") || boxes[index].className.includes("jumpleft") || boxes[index].className.includes("jumpright") || 
+		boxes[index].className.includes("waterup") || boxes[index].className.includes("waterdown") || boxes[index].className.includes("waterleft") || boxes[index].className.includes("waterright") || 
+		boxes[index].className.includes("strengthup") || boxes[index].className.includes("strengthdown") || boxes[index].className.includes("strengthleft") || boxes[index].className.includes("strengthright") || 
+		boxes[index].className.includes("wizardup") || boxes[index].className.includes("wizarddown") || boxes[index].className.includes("wizardleft") || boxes[index].className.includes("wizardright")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
 		document.getElementById("returnfromgame").style.display = "none";
@@ -414,7 +417,10 @@ function animateEnemyvert(boxes , index , direction) {
 	} // for
 	
 	// if the enemy hits you
-	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")) {
+	if (boxes[index].className.includes("jumpup") || boxes[index].className.includes("jumpdown") || boxes[index].className.includes("jumpleft") || boxes[index].className.includes("jumpright") || 
+		boxes[index].className.includes("waterup") || boxes[index].className.includes("waterdown") || boxes[index].className.includes("waterleft") || boxes[index].className.includes("waterright") || 
+		boxes[index].className.includes("strengthup") || boxes[index].className.includes("strengthdown") || boxes[index].className.includes("strengthleft") || boxes[index].className.includes("strengthright") || 
+		boxes[index].className.includes("wizardup") || boxes[index].className.includes("wizarddown") || boxes[index].className.includes("wizardleft") || boxes[index].className.includes("wizardright")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
 		document.getElementById("returnfromgame").style.display = "none";
@@ -444,7 +450,7 @@ function animateEnemyvert(boxes , index , direction) {
 		} // else
 	} // else
 	
-	currentAnimation2 =  setTimeout(function () {
+	currentAnimation =  setTimeout(function () {
 		animateEnemyvert(boxes , index , direction);
 	} , 750);
 	
@@ -589,14 +595,14 @@ function levelUp(nextClass) {
 		currentLevel++;
 		if(currentLevel == levels.length){
 		
-			clearTimeout(currentAnimation);
+			window.clearTimeout(currentAnimation);
 			showEndscreen();
 		
 		} else {
 			document.getElementById("levelup").style.display = "flex";
 			document.getElementById("gameBoard").style.display = "none";
-			document.getElementById("return").style.display = "none";
-			clearTimeout(currentAnimation);
+			document.getElementById("returnfromgame").style.display = "none";
+			window.clearTimeout(currentAnimation);
 			setTimeout(function () {
 				document.getElementById("levelup").style.display = "none";
 				document.getElementById("gameBoard").style.display = "grid";
@@ -656,6 +662,7 @@ function startGame() {
 }//startGame
 
 function restart() {
+	window.clearTimeout(currentAnimation);
 	currentLevel = 0;
 	loadLevel();
 }//restart
