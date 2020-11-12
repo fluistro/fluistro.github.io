@@ -17,6 +17,15 @@ const levels =  [
 		 "" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
 		 "" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate"
+		],
+		//level 1
+		["animatevert" , "" , "" , "" , "" , "wizardleft", "pillar",
+		 "animatevert" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
+		 "animatevert" , "pillar" , "" , "" , "" , "firelarge" , "",
+		 "animatevert" , "pillar" , "pillar" , "stairs" , "pillar" , "pillar" , "",
+		 "animatevert" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
+		 "animatevert" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
+		 "animatevert" , "" , "" , "" , "" , "" , ""
 		]
 	]; // end of levels
 
@@ -348,7 +357,7 @@ function animateEnemy(boxes , index , direction) {
 	} // for
 	
 	// if the enemy hits you
-	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")) {
+	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")){
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
 		document.getElementById("returnfromgame").style.display = "none";
@@ -383,6 +392,63 @@ function animateEnemy(boxes , index , direction) {
 	} , 750);
 	
 } // animateEnemy
+
+function animateEnemyvert(boxes , index , direction) {
+	
+	// exit the function
+	if (boxes.length <= 0) { return; }
+	
+	// update the images
+	if (direction == "down") {
+		boxes[index].classList.add("enemydown");
+	} else {
+		boxes[index].classList.add("enemyup");		
+	} // else
+	
+	// remove images from other boxes
+	for(i = 0; i < boxes.length; i++) {
+		if (i != index ) {
+			boxes[i].classList.remove("enemyup");
+			boxes[i].classList.remove("enemydown");		
+		} // if
+	} // for
+	
+	// if the enemy hits you
+	if ((boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) && !boxes[index].className.includes("enemy")) {
+		document.getElementById("lose").style.display = "block";
+		document.getElementById("gameBoard").style.display = "none";
+		document.getElementById("returnfromgame").style.display = "none";
+		window.removeEventListener("keydown" , getKey);
+	} // if
+	
+	// moving down
+	if (direction == "down") {
+		
+		// turn around if hit bottom side
+		if(index == boxes.length - 1){
+			index--;
+			direction = "up";
+		} else {
+			index++;
+		} // else
+		
+	// moving up	
+	} else {
+		
+		// turn around if hit top side
+		if (index == 0) {
+			index++;
+			direction = "down";
+		} else {
+			index--;
+		} // else
+	} // else
+	
+	currentAnimation2 =  setTimeout(function () {
+		animateEnemyvert(boxes , index , direction);
+	} , 750);
+	
+} // animateEnemyvert
 
 //move rock
 function moveRock (direction , rockLocation) {
@@ -554,7 +620,6 @@ function loadLevel() {
 	document.getElementById("storyimages").style.display = "none";
 	document.getElementById("continue").style.display = "none";
 	document.getElementById("lose").style.display = "none";
-	document.getElementById("levelup").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
 	document.getElementById("returnfromgame").style.display = "block";
 	
@@ -572,6 +637,9 @@ function loadLevel() {
 	
 	animateBoxes = document.querySelectorAll(".animate");
 	animateEnemy(animateBoxes , 0 , "right");
+	
+	animateBoxes2 = document.querySelectorAll(".animatevert");
+	animateEnemyvert(animateBoxes2 , 0 , "right");
 	
 } //loadLevel
 
