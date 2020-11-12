@@ -1,32 +1,31 @@
 const levels =  [
 
 		//level 0
-		["tree" , "tree" , "tree" , "tree" , "tree" , "tree", "tree",
-		 "tree" , "tree" , "tree" ,"tree" , "tree" , "tree", "flag",
-		 "tree" , "tree" , "tree" , "hatjump" , "tree" , "tree" , "fenceside",
+		["pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar", "pillar",
+		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairs",
+		 "pillar" , "pillar" , "pillar" , "hatjump" , "pillar" , "pillar" , "fenceside",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate",
-		 "" , "tree" , "" , "tree" , "" , "tree" , "",
-		 "" , "tree" , "" , "tree" , "" , "tree" , "",
+		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
+		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
 		 "" , "" , "" , "horseup" , "" , "" , ""
 		],
 		//level 1
-		["" , "" , "" , "" , "" , "horseleft", "tree",
-		 "" , "tree" , "tree" ,"tree" , "tree" , "tree", "tree",
-		 "" , "tree" , "" , "" , "" , "water" , "",
-		 "" , "tree" , "tree" , "flag" , "tree" , "tree" , "",
-		 "" , "tree" , "tree" , "tree" , "tree" , "tree" , "",
-		 "" , "tree" , "tree" , "hatwater" , "tree" , "tree" , "water",
+		["" , "" , "" , "" , "" , "horseleft", "pillar",
+		 "" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
+		 "" , "pillar" , "" , "" , "" , "firelarge" , "",
+		 "" , "pillar" , "pillar" , "stairs" , "pillar" , "pillar" , "",
+		 "" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
+		 "" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate"
 		]
 	]; // end of levels
 
 const gridBoxes = document.querySelectorAll("#gameBoard div");
-const noPassObstacles = ["tree"];
 var currentLevel = 0;	// starting level
 var jumpOn = false; // is the rider on?
 var waterOn = false;
 var strengthOn = false;
-var currentLocationOfHorse = 0;
+var currentLocation = 0;
 var currentAnimation;	// allows 1 animation per level
 var widthOfBoard = 7;
 
@@ -40,22 +39,22 @@ function getKey(e) {
 	switch (e.keyCode) {
 		
 		case 37:// left arrow
-			if (currentLocationOfHorse % widthOfBoard !== 0) {
+			if (currentLocation % widthOfBoard !== 0) {
 				tryToMove("left");
 			} // if
 			break;
 		case 38:// up arrow
-			if (currentLocationOfHorse - widthOfBoard >= 0) {
+			if (currentLocation - widthOfBoard >= 0) {
 				tryToMove("up");
 			} // if
 		break;
 		case 39:// right arrow
-			if (currentLocationOfHorse % widthOfBoard < widthOfBoard - 1) {
+			if (currentLocation % widthOfBoard < widthOfBoard - 1) {
 				tryToMove("right");
 			} // if
 			break;
 		case 40:// down arrow
-			if (currentLocationOfHorse + widthOfBoard < widthOfBoard * widthOfBoard) {
+			if (currentLocation + widthOfBoard < widthOfBoard * widthOfBoard) {
 				tryToMove("down");
 			} // if
 			break;
@@ -66,7 +65,7 @@ function getKey(e) {
 function tryToMove(direction) {
 	
 	//location before move
-	let oldLocation = currentLocationOfHorse;
+	let oldLocation = currentLocation;
 	
 	// class of location before move
 	let oldClassName = gridBoxes[oldLocation].className;
@@ -81,152 +80,121 @@ function tryToMove(direction) {
 	
 	switch (direction) {
 		case "left":
-			nextLocation = currentLocationOfHorse - 1;
+			nextLocation = currentLocation - 1;
 			break;
 		case "right":
-			nextLocation =  currentLocationOfHorse + 1;
+			nextLocation =  currentLocation + 1;
 			break;
 		case "up":
-			nextLocation = currentLocationOfHorse - widthOfBoard;
+			nextLocation = currentLocation - widthOfBoard;
 			break;
 		case "down":
-			nextLocation = currentLocationOfHorse + widthOfBoard;
+			nextLocation = currentLocation + widthOfBoard;
 			break;
 	} // switch
 	
 	nextClass = gridBoxes[nextLocation].className;
 	
-	if (noPassObstacles.includes(nextClass)){ 
+	if (nextClass == "pillar") { 
 	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("water" + direction); 
 		} else if (jumpOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+			gridBoxes[currentLocation].className = ("jump" + direction); 
 		} else if (strengthOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("strength" + direction); 
 		} else {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("wizard" + direction); 
 		} // else
 		return; 
 	} // if
 	
-	//if the obstacle is not passable, don't move
-	if (!waterOn && nextClass == "water") { 
+	if (!waterOn && nextClass == "firelarge") { 
 	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if (jumpOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+			gridBoxes[currentLocation].className = ("jump" + direction); 
 		} else if (strengthOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("strength" + direction); 
 		} else {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("wizard" + direction); 
 		} // else
 		return; 
 	} // if
 	
-	// if it's a fence, and there is no rider, don't move
-	if (!jumpOn && nextClass.includes("fence")) { 
+	if (!jumpOn && nextClass == "spikes") { 
 	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("water" + direction); 
 		} else if (strengthOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("strength" + direction); 
 		} else {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("wizard" + direction); 
 		} // else
 		return;
 	} // if
 	
-	if(!strengthOn && nextClass.includes("rock")) { 
+	if(!strengthOn && nextClass == "rock") { 
 	
 		// makes sure the right character is displayed when hitting an inpassable object
 		if(waterOn){
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("water" + direction); 
 		} else if (jumpOn) {
-			gridBoxes[currentLocationOfHorse].className = ("horserider" + direction); 
+			gridBoxes[currentLocation].className = ("jump" + direction); 
 		} else {
-			gridBoxes[currentLocationOfHorse].className = ("horse" + direction); 
+			gridBoxes[currentLocation].className = ("wizard" + direction); 
 		} // else
 		return;  
 	} // if
 	
-	// if there is a fence, move two spaces with animation
-	if (nextClass.includes("fence")) {
+	// if there are spikes, move two spaces with animation
+	if (nextClass == "spikes") {
 		
-		gridBoxes[currentLocationOfHorse].className = "";
+		gridBoxes[currentLocation].className = "";
 		oldClassName = gridBoxes[nextLocation].className;
 
-		// if the horse isn't jumping in the right direction, don't move
-		if ((direction == "left" || direction == "right") && nextClass.includes("side")) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-			console.log(newClass + currentLocationOfHorse);
-			return;
-		} else if ((direction == "up" || direction == "down") && nextClass.includes("up")) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-			console.log(newClass + currentLocationOfHorse + gridBoxes[currentLocationOfHorse].classList);
-			return;
-		} // else if
-
 		// set values according to direction
-		if (direction == "left" && nextClass.includes("up")) {
-			nextClass = "jumpleft";
-			nextClass2 = "horseriderleft";
+		if (direction == "left") {
+			nextClass = "spikejumpleft";
+			nextClass2 = "jumpleft";
 			nextLocation2 = nextLocation - 1;
 			if (nextLocation % widthOfBoard == 0) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				gridBoxes[currentLocation].classList.add("jump" + direction);
 				return;
 			} // if
-		} else if (direction == "right" && nextClass.includes("up")) {
-			nextClass = "jumpright";
-			nextClass2 = "horseriderright";
+		} else if (direction == "right") {
+			nextClass = "spikejumpright";
+			nextClass2 = "jumpright";
 			nextLocation2 = nextLocation + 1;
 			if (nextLocation % widthOfBoard == widthOfBoard - 1) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				gridBoxes[currentLocation].classList.add("jump" + direction);
 				return;
 			} // if
-		} else if (direction == "up" && nextClass.includes("side")) {
-			nextClass = "jumpup";
-			nextClass2 = "horseriderup";
+		} else if (direction == "up") {
+			nextClass = "spikejumpup";
+			nextClass2 = "jumpup";
 			nextLocation2 = nextLocation - widthOfBoard;
 			if (nextLocation - widthOfBoard < 0) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				gridBoxes[currentLocation].classList.add("jump" + direction);
 				return;
 			} // if
-		} else if (direction == "down" && nextClass.includes("side")) {
-			nextClass = "jumpdown";
-			nextClass2 = "horseriderdown";
+		} else if (direction == "down") {
+			nextClass = "spikejumpdown";
+			nextClass2 = "jumpdown";
 			nextLocation2 = nextLocation + widthOfBoard;
 			if (nextLocation + widthOfBoard >= widthOfBoard * widthOfBoard) {
-				gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+				gridBoxes[currentLocation].classList.add("jump" + direction);
 				return;
 			} // if
-		}
+		}//if
 
 		// if there is an impassible object, don't move
-		if (noPassObstacles.includes(gridBoxes[nextLocation2].className)) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
+		if (gridBoxes[nextLocation2].className == "pillar" || gridBoxes[nextLocation2].className == "spikes" || gridBoxes[nextLocation2].className == "firelarge" || gridBoxes[nextLocation2].className == "rock") {
+			gridBoxes[currentLocation].classList.add("jump" + direction);
 			return;
-		} // if	
-
-		// if there is an impassible object, don't move
-		if (gridBoxes[nextLocation2].className.includes("fence")) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-			return;
-		} // if				
-		
-		// if there is an impassible object, don't move
-		if (gridBoxes[nextLocation2].className.includes("water")) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-			return;
-		} // if		
-		
-		// if there is an impassible object, don't move
-		if (gridBoxes[nextLocation2].className.includes("rock")) {
-			gridBoxes[currentLocationOfHorse].classList.add("horserider" + direction);
-			return;
-		} // if		
+		} // if
 
 		// show horse jumping
 		gridBoxes[nextLocation].className = nextClass;
@@ -240,13 +208,13 @@ function tryToMove(direction) {
 			gridBoxes[nextLocation].className = oldClassName;
 
 			// update current location of horse to be two spaces past take off
-			currentLocationOfHorse = nextLocation2;
+			currentLocation = nextLocation2;
 
 			// get class of box after jump
-			nextClass = gridBoxes[currentLocationOfHorse].className;
+			nextClass = gridBoxes[currentLocation].className;
 
 			// show horse and rider after landing
-			gridBoxes[currentLocationOfHorse].className = nextClass2;
+			gridBoxes[currentLocation].className = nextClass2;
 
 			// if next box is a flag, go up a level
 			levelUp(nextClass);
@@ -258,17 +226,17 @@ function tryToMove(direction) {
 
 		return;
 		
-	} // if there's a fence
+	} // if there's spikes
 	
 	if (nextClass == "rock") {
 		moveRock(direction , nextLocation);
 		return;
 	} // if
 	
-	if (nextClass == "water") {
+	if (nextClass == "firelarge") {
 		
-		//show orse in right direction
-		gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		//show wizard in right direction
+		gridBoxes[currentLocation].className = "water" + direction;
 		
 		// disables eventListener
 		window.removeEventListener("keydown" , getKey);
@@ -277,13 +245,13 @@ function tryToMove(direction) {
 		setTimeout ( function () {
 			
 			// show the medium fire
-			gridBoxes[nextLocation].className = "watermedium";
+			gridBoxes[nextLocation].className = "firemedium";
 			
 		} , 350);
 		setTimeout ( function () {
 			
 			// show the small fire
-			gridBoxes[nextLocation].className = "watersmall";
+			gridBoxes[nextLocation].className = "firesmall";
 			
 		} , 700);
 		setTimeout ( function () {
@@ -315,30 +283,38 @@ function tryToMove(direction) {
 	} // if
 	
 	// if there is a bridge in the old location, keep it
-	if (oldClassName.includes("bridge")) {
-		gridBoxes[oldLocation].className = "bridge";
+	if (oldClassName.includes("stairs")) {
+		gridBoxes[oldLocation].className = "stairs";
 	} else {
 		gridBoxes[oldLocation].className = "";
 	} // else
 	
-	// build name of new class 
-	newClass = (jumpOn) ? "horserider" : "horse";
+	// build name of new class
+	if(jumpOn){
+		newClass = "jump";
+	} else if(strengthOn) {
+		newClass = "strength";
+	} else if(waterOn) {
+		newClass = "water";
+	} else {
+		newClass = "wizard";
+	}//else
 	newClass += direction;
 	
 	// if there is a bridge in the next location, keep it
-	if (gridBoxes[nextLocation].classList.contains("bridge")) {
-		newClass += " bridge";
+	if (gridBoxes[nextLocation].classList.contains("stairs")) {
+		newClass += "stairs";
 	} // if
 	
 	// move 1 spaces
-	currentLocationOfHorse = nextLocation;
-	gridBoxes[currentLocationOfHorse].className = newClass;
+	currentLocation = nextLocation;
+	gridBoxes[currentLocation].className = newClass;
 	
 	// if it is an enemy
 	if (nextClass.includes("enemy")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
-		document.getElementById("return").style.display = "none";
+		document.getElementsByClassName("return").style.display = "none";
 		window.removeEventListener("keydown" , getKey);
 	} // if
 	
@@ -346,106 +322,6 @@ function tryToMove(direction) {
 	levelUp(nextClass);
 	
 } // tryToMove
-
-// move up a level
-function levelUp(nextClass) {
-	if(nextClass == "flag") {
-		currentLevel++;
-		if(currentLevel == levels.length){
-		
-			clearTimeout(currentAnimation);
-			showEndscreen();
-		
-		} else {
-			document.getElementById("levelup").style.display = "flex";
-			document.getElementById("gameBoard").style.display = "none";
-			document.getElementById("return").style.display = "none";
-			clearTimeout(currentAnimation);
-			setTimeout(function () {
-				document.getElementById("levelup").style.display = "none";
-				document.getElementById("gameBoard").style.display = "grid";
-				loadLevel();
-			} , 1000);
-			
-		} // else
-		
-	} // if
-} // levelUp
-
-function startGame() {
-	currentLevel = 0;
-	document.getElementById("menu").style.display = "none";
-	
-	//show story here
-	document.getElementById("story").style.display = "block";
-	document.getElementById("storyimages").style.display = "block";
-	document.getElementById("continue").style.display = "block";
-	
-}//startGame
-
-// load levels 0 - maxlevel
-function loadLevel() {
-	let levelMap = levels[currentLevel];
-	let animateBoxes;
-	jumpOn = false;
-	waterOn = false;
-	strengthOn = false;
-	
-	document.getElementById("story").style.display = "none";
-	document.getElementById("storyimages").style.display = "none";
-	document.getElementById("continue").style.display = "none";
-	document.getElementById("gameBoard").style.display = "grid";
-	document.getElementById("return").style.display = "block";
-	
-	// load the board
-	for(i = 0; i < gridBoxes.length; i++ ) {
-		gridBoxes[i].className = levelMap[i];
-		if (levelMap[i].includes("horse")) {
-			currentLocationOfHorse = i;
-		} // if
-	
-	} // for
-	
-	// event listener
-	window.addEventListener("keydown" , getKey); 
-	
-	animateBoxes = document.querySelectorAll(".animate");
-	animateEnemy(animateBoxes , 0 , "right");
-	
-} //startGame
-
-function showEndscreen() {
-	
-	document.getElementById("instructions").style.display = "none";
-	document.getElementById("return").style.display = "none";
-	document.getElementById("lose").style.display = "none";
-	document.getElementById("menu").style.display = "none";
-
-	document.getElementById("gameBoard").style.display = "none";
-	document.getElementById("return").style.display = "none";
-	document.getElementById("endscreen").style.display = "block";
-	
-} // showEndscreen
-
-//show menu
-function showMenu() {
-	
-	//hide everything but the menu
-	document.getElementById("instructions").style.display = "none";
-	document.getElementById("gameBoard").style.display = "none";
-	document.getElementById("return").style.display = "none";
-	document.getElementById("lose").style.display = "none";
-	document.getElementById("endscreen").style.display = "none";
-	document.getElementById("menu").style.display = "block";
-	window.clearTimeout(currentAnimation);
-}//showMenu
-
-//show instructions
-function showInstructions() {
-	document.getElementById("menu").style.display = "none";
-	document.getElementById("instructions").style.display = "block";
-	document.getElementById("return").style.display = "block";	
-}//showInstructions
 
 // animate enemy left to right (could add up and down to this)
 // boxes - array of grid boxes that include animation
@@ -472,7 +348,7 @@ function animateEnemy(boxes , index , direction) {
 	} // for
 	
 	// if the enemy hits you
-	if (boxes[index].className.includes("horse")) {
+	if (boxes[index].className.includes("up") || boxes[index].className.includes("down") || boxes[index].className.includes("left") || boxes[index].className.includes("right")) {
 		document.getElementById("lose").style.display = "block";
 		document.getElementById("gameBoard").style.display = "none";
 		document.getElementById("return").style.display = "none";
@@ -516,25 +392,25 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation % widthOfBoard == 0) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - 1].className.includes("tree") || gridBoxes[rockLocation - 1].className.includes("water") || gridBoxes[rockLocation - 1].className.includes("fence") || gridBoxes[rockLocation - 1].className.includes("flag")) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		if (gridBoxes[rockLocation - 1].className.includes("pillar") || gridBoxes[rockLocation - 1].className.includes("firelarge") || gridBoxes[rockLocation - 1].className.includes("spikes") || gridBoxes[rockLocation - 1].className.includes("stairs")) { 
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
 		
 		// remove the old horse
-		gridBoxes[currentLocationOfHorse].className = "";
+		gridBoxes[currentLocation].className = "";
 		
 		// update the location of the horse
-		currentLocationOfHorse --;
+		currentLocation --;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "horse" + direction;
+		gridBoxes[rockLocation].className = "wizard" + direction;
 		
 		// update location of rock
 		rockLocation --;
@@ -548,25 +424,25 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation % widthOfBoard == widthOfBoard - 1) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + 1].className.includes("tree") || gridBoxes[rockLocation + 1].className.includes("water") || gridBoxes[rockLocation + 1].className.includes("fence") || gridBoxes[rockLocation + 1].className.includes("flag")){ 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		if (gridBoxes[rockLocation + 1].className.includes("pillar") || gridBoxes[rockLocation + 1].className.includes("firelarge") || gridBoxes[rockLocation + 1].className.includes("spikes") || gridBoxes[rockLocation + 1].className.includes("stairs")){ 
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
 		
 		// remove the old horse
-		gridBoxes[currentLocationOfHorse].className = "";
+		gridBoxes[currentLocation].className = "";
 		
 		// update the location of the horse
-		currentLocationOfHorse ++;
+		currentLocation ++;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "horse" + direction;
+		gridBoxes[rockLocation].className = "wizard" + direction;
 		
 		// update location of rock
 		rockLocation ++;
@@ -580,25 +456,25 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation - widthOfBoard < 0) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation - widthOfBoard].className.includes("tree") || gridBoxes[rockLocation - widthOfBoard].className.includes("water") || gridBoxes[rockLocation - widthOfBoard].className.includes("fence") || gridBoxes[rockLocation - widthOfBoard].className.includes("flag")) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		if (gridBoxes[rockLocation - widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation - widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation - widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation - widthOfBoard].className.includes("stairs")) { 
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
 		
 		// remove the old horse
-		gridBoxes[currentLocationOfHorse].className = "";
+		gridBoxes[currentLocation].className = "";
 		
 		// update the location of the horse
-		currentLocationOfHorse -= widthOfBoard;
+		currentLocation -= widthOfBoard;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "horse" + direction;
+		gridBoxes[rockLocation].className = "wizard" + direction;
 		
 		// update location of rock
 		rockLocation -= widthOfBoard;
@@ -612,25 +488,25 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation + widthOfBoard >= widthOfBoard * widthOfBoard) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
-		if (gridBoxes[rockLocation + widthOfBoard].className.includes("tree") || gridBoxes[rockLocation + widthOfBoard].className.includes("water") || gridBoxes[rockLocation + widthOfBoard].className.includes("fence") || gridBoxes[rockLocation + widthOfBoard].className.includes("flag")) { 
-			gridBoxes[currentLocationOfHorse].className = "horse" + direction;
+		if (gridBoxes[rockLocation + widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation + widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation + widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation + widthOfBoard].className.includes("stairs")) { 
+			gridBoxes[currentLocation].className = "wizard" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
 		
 		// remove the old horse
-		gridBoxes[currentLocationOfHorse].className = "";
+		gridBoxes[currentLocation].className = "";
 		
 		// update the location of the horse
-		currentLocationOfHorse += widthOfBoard;
+		currentLocation += widthOfBoard;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "horse" + direction;
+		gridBoxes[rockLocation].className = "wizard" + direction;
 		
 		// update location of rock
 		rockLocation += widthOfBoard;
@@ -640,3 +516,105 @@ function moveRock (direction , rockLocation) {
 	} // if
 	
 } // moveRock
+
+// move up a level
+function levelUp(nextClass) {
+	if(nextClass == "stairs") {
+		currentLevel++;
+		if(currentLevel == levels.length){
+		
+			clearTimeout(currentAnimation);
+			showEndscreen();
+		
+		} else {
+			document.getElementById("levelup").style.display = "flex";
+			document.getElementById("gameBoard").style.display = "none";
+			document.getElementById("return").style.display = "none";
+			clearTimeout(currentAnimation);
+			setTimeout(function () {
+				document.getElementById("levelup").style.display = "none";
+				document.getElementById("gameBoard").style.display = "grid";
+				loadLevel();
+			} , 1000);
+			
+		} // else
+		
+	} // if
+} // levelUp
+
+// load levels 0 - maxlevel
+function loadLevel() {
+	let levelMap = levels[currentLevel];
+	let animateBoxes;
+	jumpOn = false;
+	waterOn = false;
+	strengthOn = false;
+	
+	document.getElementById("story").style.display = "none";
+	document.getElementById("storyimages").style.display = "none";
+	document.getElementById("continue").style.display = "none";
+	document.getElementById("gameBoard").style.display = "grid";
+	document.getElementsByClassName("return").style.display = "block";
+	
+	// load the board
+	for(i = 0; i < gridBoxes.length; i++ ) {
+		gridBoxes[i].className = levelMap[i];
+		if (levelMap[i].includes("wizard")) {
+			currentLocation = i;
+		} // if
+	
+	} // for
+	
+	// event listener
+	window.addEventListener("keydown" , getKey); 
+	
+	animateBoxes = document.querySelectorAll(".animate");
+	animateEnemy(animateBoxes , 0 , "right");
+	
+} //startGame
+
+//start the game
+function startGame() {
+	currentLevel = 0;
+	document.getElementById("menu").style.display = "none";
+	
+	//show story here
+	document.getElementById("story").style.display = "block";
+	document.getElementById("storyimages").style.display = "block";
+	document.getElementById("continue").style.display = "block";
+	
+}//startGame
+
+//show ending screen
+function showEndscreen() {
+	
+	document.getElementById("instructions").style.display = "none";
+	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("menu").style.display = "none";
+
+	document.getElementById("gameBoard").style.display = "none";
+	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("endscreen").style.display = "block";
+	
+} // showEndscreen
+
+//show menu
+function showMenu() {
+	
+	//hide everything but the menu
+	document.getElementById("instructions").style.display = "none";
+	document.getElementById("gameBoard").style.display = "none";
+	document.getElementsByClassName("return").style.display = "none";
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("endscreen").style.display = "none";
+	document.getElementById("menu").style.display = "block";
+	window.clearTimeout(currentAnimation);
+}//showMenu
+
+//show instructions
+function showInstructions() {
+	document.getElementById("menu").style.display = "none";
+	document.getElementById("instructions").style.display = "block";
+	document.getElementsByClassName("return").style.display = "block";	
+}//showInstructions
