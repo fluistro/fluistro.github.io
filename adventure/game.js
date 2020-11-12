@@ -553,6 +553,7 @@ function loadLevel() {
 	document.getElementById("story").style.display = "none";
 	document.getElementById("storyimages").style.display = "none";
 	document.getElementById("continue").style.display = "none";
+	document.getElementById("lose").style.display = "none";
 	document.getElementById("gameBoard").style.display = "grid";
 	document.getElementById("returnfromgame").style.display = "block";
 	
