@@ -22,14 +22,13 @@ body {
 	height:840px;
 	margin-left:auto;
 	margin-right:auto;
-	z-index:1;
+	background-image:url("images/floor.png");
 }
 
 #gameBoard div{
 	background-color:#00EE00;
 	background-repeat:no-repeat;
 	background-size:cover;
-	z-index:1;
 }
 
 #menu button{
@@ -262,88 +261,112 @@ body {
 	justify-content:center;
 }
 
-.rider {
-	background-image:url("images/rider.png");
+.pillar {
+	background-image:url("images/pillar.png");
 }
 
-.tree {
-	background-image:url("images/tree.png");
-}
-
-.flag {
-	background-image:url("images/flag.png");
+.stairs {
+	background-image:url("images/stairs.png");
 }
 
 .rock {
 	background-image:url("images/rock.png");
 }
 
-.fenceup {
-	background-image:url("images/fenceup.png");
+.spikes {
+	background-image:url("images/spikes.png");
 }
 
-.fenceside {
-	background-image:url("images/fenceside.png");
+.firelarge {
+	background-image:url("images/firelarge.png");
 }
 
-.water {
-	background-image:url("images/water.png");
+.firemedium {
+	background-image:url("images/firemedium.png");
 }
 
-.watermedium {
-	background-image:url("images/watermedium.png");
+.firesmall {
+	background-image:url("images/firesmall.png");
 }
 
-.watersmall {
-	background-image:url("images/watersmall.png");
+.wizardup {
+	background-image:url("images/wizardup.png");
 }
 
-.horseup {
-	background-image:url("images/horseup.png");
+.wizardleft {
+	background-image:url("images/wizardleft.png");
 }
 
-.horseleft {
-	background-image:url("images/horseleft.png");
+.wizardright {
+	background-image:url("images/wizardright.png");
 }
 
-.horseright {
-	background-image:url("images/horseright.png");
-}
-
-.horsedown {
-	background-image:url("images/horsedown.png");
-}
-
-.horseriderup{
-	background-image:url("images/horseriderup.png");
-}
-
-.horseriderleft {
-	background-image:url("images/horseriderleft.png");
-}
-
-.horseriderright {
-	background-image:url("images/horseriderright.png");
-}
-
-.horseriderdown {
-	background-image:url("images/horseriderdown.png");
+.wizarddown {
+	background-image:url("images/wizarddown.png");
 }
 
 .jumpup {
-	background-image:url("images/fencejumpup.png");
+	background-image:url("images/jumpup.png");
 }
 
 .jumpleft {
-	background-image:url("images/fencejumpleft.png");
+	background-image:url("images/jumpleft.png");
 }
 
 .jumpright {
-	background-image:url("images/fencejumpright.png");
+	background-image:url("images/jumpright.png");
 }
 
 .jumpdown {
-	background-image:url("images/fencejumpdown.png");
+	background-image:url("images/jumpdown.png");
+}
+
+.waterup {
+	background-image:url("images/waterup.png");
+}
+
+.waterleft {
+	background-image:url("images/waterleft.png");
+}
+
+.waterright {
+	background-image:url("images/waterright.png");
+}
+
+.waterdown {
+	background-image:url("images/waterdown.png");
+}
+
+.strengthup {
+	background-image:url("images/strengthup.png");
+}
+
+.strengthleft {
+	background-image:url("images/strengthleft.png");
+}
+
+.strengthright {
+	background-image:url("images/strengthright.png");
+}
+
+.strengthdown {
+	background-image:url("images/strengthdown.png");
+}
+
+.spikejumpup {
+	background-image:url("images/spikejumpup.png");
+}
+
+.spikejumpleft {
+	background-image:url("images/spikejumpleft.png");
+}
+
+.spikejumpright {
+	background-image:url("images/spikejumpright.png");
+}
+
+.spikejumpdown {
+	background-image:url("images/spikejumpdown.png");
 }
 
 .enemyup {
@@ -360,10 +383,6 @@ body {
 
 .enemydown {
 	background-image:url("images/enemydown.png");
-}
-
-.bridge {
-	background-color:#800020 !important;
 }
 
 .hatjump {
