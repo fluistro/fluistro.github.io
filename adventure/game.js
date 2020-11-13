@@ -503,7 +503,6 @@ function moveRock (direction , rockLocation) {
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation - 1].className.includes("pillar") || gridBoxes[rockLocation - 1].className.includes("firelarge") || gridBoxes[rockLocation - 1].className.includes("spikes") || gridBoxes[rockLocation - 1].className.includes("stairs")) { 
 			gridBoxes[currentLocation].className = "strength" + direction;
-			console.log("impassible"); 
 			return; 
 		} // if
 		
@@ -535,7 +534,6 @@ function moveRock (direction , rockLocation) {
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation + 1].className.includes("pillar") || gridBoxes[rockLocation + 1].className.includes("firelarge") || gridBoxes[rockLocation + 1].className.includes("spikes") || gridBoxes[rockLocation + 1].className.includes("stairs")){ 
 			gridBoxes[currentLocation].className = "strength" + direction;
-			console.log("impassible"); 
 			return; 
 		} // if
 		
@@ -567,7 +565,6 @@ function moveRock (direction , rockLocation) {
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation - widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation - widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation - widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation - widthOfBoard].className.includes("stairs")) { 
 			gridBoxes[currentLocation].className = "strength" + direction;
-			console.log("impassible"); 
 			return; 
 		} // if
 		
@@ -599,7 +596,6 @@ function moveRock (direction , rockLocation) {
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation + widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation + widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation + widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation + widthOfBoard].className.includes("stairs")) { 
 			gridBoxes[currentLocation].className = "strength" + direction;
-			console.log("impassible"); 
 			return; 
 		} // if
 		
