@@ -2,7 +2,7 @@ const levels =  [
 
 		//level 0
 		["pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar", "pillar",
-		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairs",
+		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairsup",
 		 "pillar" , "pillar" , "pillar" , "hatjump" , "pillar" , "pillar" , "spikes",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate",
 		 "" , "pillar" , "" , "pillar" , "" , "pillar" , "",
@@ -10,19 +10,19 @@ const levels =  [
 		 "" , "" , "" , "wizardup" , "" , "" , ""
 		],
 		//level 1
-		["" , "" , "" , "" , "" , "wizardleft", "pillar",
+		["" , "" , "" , "" , "" , "wizardleft stairsleft", "pillar",
 		 "" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
 		 "" , "pillar" , "" , "" , "" , "firelarge" , "",
-		 "" , "pillar" , "pillar" , "stairs" , "pillar" , "pillar" , "",
+		 "" , "pillar" , "pillar" , "stairsdown" , "pillar" , "pillar" , "",
 		 "" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
 		 "" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate"
 		],
 		//level 1
 		["animatevert" , "" , "" , "" , "" , "wizardleft", "pillar",
-		 "animatevert" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
+		 "animatevert" , "" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
 		 "animatevert" , "pillar" , "" , "" , "" , "firelarge" , "",
-		 "animatevert" , "pillar" , "pillar" , "stairs" , "pillar" , "pillar" , "",
+		 "animatevert" , "pillar" , "pillar" , "stairsright" , "pillar" , "pillar" , "",
 		 "animatevert" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
 		 "animatevert" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
 		 "animatevert" , "" , "" , "" , "" , "" , ""
@@ -292,8 +292,10 @@ function tryToMove(direction) {
 	} // if
 	
 	// if there is a bridge in the old location, keep it
-	if (oldClassName.includes("stairs")) {
-		gridBoxes[oldLocation].className = "stairs";
+	if (oldClassName.includes("stairsleft")) {
+		gridBoxes[oldLocation].className = "stairsleft";
+	} else if (oldClassName.includes("stairsrigt")) {
+		gridBoxes[oldLocation].className = "stairsright";
 	} else {
 		gridBoxes[oldLocation].className = "";
 	} // else
@@ -310,10 +312,14 @@ function tryToMove(direction) {
 	}//else
 	newClass += direction;
 	
+	/*
 	// if there is a bridge in the next location, keep it
-	if (gridBoxes[nextLocation].classList.contains("stairs")) {
-		newClass += "stairs";
-	} // if
+	if (gridBoxes[nextLocation].classList.contains("stairsleft")) {
+		newClass += " stairsleft";
+	} else 	if (gridBoxes[nextLocation].classList.contains("stairsright")) {
+		newClass += " stairsright";
+	} // else if
+	*/
 	
 	// move 1 spaces
 	currentLocation = nextLocation;
@@ -591,7 +597,7 @@ function moveRock (direction , rockLocation) {
 
 // move up a level
 function levelUp(nextClass) {
-	if(nextClass == "stairs") {
+	if(nextClass.includes("stairsup") || nextClass.includes("stairsdown")) {
 		currentLevel++;
 		if(currentLevel == levels.length){
 		

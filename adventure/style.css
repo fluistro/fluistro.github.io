@@ -22,13 +22,14 @@ body {
 	height:840px;
 	margin-left:auto;
 	margin-right:auto;
+	background-color:#A5A5A5;
 	background-image:url("images/floor.png");
+	/*background-repeat:no-repeat;*/
+	/*background-size:cover;*/
 }
 
 #gameBoard div{
-	background-color:#00EE00;
-	background-repeat:no-repeat;
-	background-size:cover;
+	
 }
 
 #menu button{
@@ -156,7 +157,7 @@ body {
 
 #instructions p{
 	font-size:35px;
-	text-align:left;
+	text-align:center;
 	color:white;
 	font-family: 'Syne Tactile', cursive;
 	margin-left:200px;
@@ -170,18 +171,19 @@ body {
 	width:60%;
 }
 
-#storyimages{
+#storyimages {
+	display:none;
 	position:absolute;
-	left:0px;
-	top:100px;
-	width:40%;
-	padding:50px;
-	text-align:center;
-}
-
-#storyimages img{
-	height:500px;
-	width:200px;
+	left:5vw;
+	top:5vw;
+	width:30vw;
+	height:75vh;
+	margin:0px;
+	padding:0px;
+	background-image:url("images/idle_1.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
 }
 
 #story p{
@@ -267,8 +269,12 @@ body {
 	background-image:url("images/pillar.png");
 }
 
-.stairs {
-	background-image:url("images/stairs.png");
+.stairsup {
+	background-image:url("images/stairsup.png");
+}
+
+.stairsdown {
+	background-image:url("images/stairsdown.png");
 }
 
 .rock {
