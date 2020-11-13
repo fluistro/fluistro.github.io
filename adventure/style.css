@@ -142,15 +142,15 @@ body {
 #title {
 	font-size:200px;
 	font-family: 'Syne Tactile', cursive;
-	color:#DECC64;
+	color:#9267CB;
 	text-align:center;
 	margin-bottom:150px;
 }
 
 #instructions h1{
-	font-size:80px;
+	font-size:120px;
 	font-family: 'Syne Tactile', cursive;
-	color:white;
+	color:#9267CB;
 	text-align:center;
 	margin-bottom:50px;
 }
@@ -158,8 +158,9 @@ body {
 #instructions p{
 	font-size:35px;
 	text-align:center;
-	color:white;
+	color:#9267CB;
 	font-family: 'Syne Tactile', cursive;
+	font-weight:bold;
 	margin-left:200px;
 	margin-right:200px;
 	margin-bottom:100px;
@@ -189,7 +190,7 @@ body {
 #story p{
 	font-size:35px;
 	text-align:center;
-	color:white;
+	color:#FFFFFA;
 	font-family: 'Syne Tactile', cursive;
 	margin-left:100px;
 	margin-right:100px;
