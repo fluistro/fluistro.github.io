@@ -1,5 +1,4 @@
 const levels =  [
-		/*
 		//level 0
 		["pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar", "pillar",
 		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairsup",
@@ -35,7 +34,7 @@ const levels =  [
 		 "pillar" , "" , "" , "pillar" , "stairsup" , "pillar" , "pillar",
 		 "pillar" , "" , "" , "" , "" , "" , "pillar",
 		 "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar"
-		],*/
+		],
 		//level 4
 		["pillar" , "hatstrength" , "" , "spikes" , "" , "pillar", "pillar",
 		 "pillar" , "pillar" , "" ,"pillar" , "spikes" , "pillar", "pillar",
