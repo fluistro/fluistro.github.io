@@ -1,5 +1,5 @@
 const levels =  [
-
+		/*
 		//level 0
 		["pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar", "pillar",
 		 "pillar" , "pillar" , "pillar" ,"pillar" , "pillar" , "pillar", "stairsup",
@@ -18,14 +18,41 @@ const levels =  [
 		 "" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
 		 "animate" , "animate" , "animate" , "animate" , "animate" , "animate" , "animate"
 		],
-		//level 1
-		["animatevert" , "" , "" , "" , "" , "wizardleft", "pillar",
-		 "animatevert" , "" , "pillar" ,"pillar" , "pillar" , "pillar", "pillar",
-		 "animatevert" , "pillar" , "" , "" , "" , "firelarge" , "",
-		 "animatevert" , "pillar" , "pillar" , "stairsright" , "pillar" , "pillar" , "",
-		 "animatevert" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "",
-		 "animatevert" , "pillar" , "pillar" , "hatwater" , "pillar" , "pillar" , "firelarge",
-		 "animatevert" , "" , "" , "" , "" , "" , ""
+		//level 2
+		["pillar" , "pillar" , "hatwater" , "pillar" , "hatjump" , "firelarge", "",
+		 "stairsup" , "pillar" , "animatevert" ,"pillar" , "pillar" , "pillar", "",
+		 "" , "pillar" , "animatevert" , "" , "" , "pillar" , "",
+		 "spikes" , "pillar" , "animatevert" , "pillar" , "" , "pillar" , "",
+		 "" , "pillar" , "animatevert" , "wizarddown" , "" , "pillar" , "",
+		 "" , "pillar" , "animatevert" , "" , "" , "pillar" , "firelarge",
+		 "" , "" , "animatevert" , "" , "" , "" , ""
+		],
+		//level 3
+		["pillar" , "wizardright" , "" , "" , "animate" , "animate", "animate",
+		 "pillar" , "pillar" , "rock" ,"pillar" , "pillar" , "hatstrength", "pillar",
+		 "pillar" , "pillar" , "" , "pillar" , "pillar" , "pillar" , "pillar",
+		 "pillar" , "pillar" , "" , "pillar" , "pillar" , "pillar" , "pillar",
+		 "pillar" , "" , "" , "pillar" , "stairsup" , "pillar" , "pillar",
+		 "pillar" , "" , "" , "" , "" , "" , "pillar",
+		 "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar"
+		],*/
+		//level 4
+		["pillar" , "hatstrength" , "" , "spikes" , "" , "pillar", "pillar",
+		 "pillar" , "pillar" , "" ,"pillar" , "spikes" , "pillar", "pillar",
+		 "pillar" , "pillar" , "animatevert" , "pillar" , "" , "hatjump" , "pillar",
+		 "firelarge" , "" , "animatevert" , "pillar" , "wizardup" , "pillar" , "pillar",
+		 "" , "pillar" , "animatevert" , "pillar" , "pillar" , "hatwater" , "pillar",
+		 "stairsdown" , "pillar" , "" , "rock" , "" , "" , "",
+		 "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar" , "pillar"
+		],
+		//level 5
+		["hatstrength" , "hatjump" , "pillar" , "pillar" , "pillar" , "hatjump", "hatstrength",
+		 "" , "" , "pillar" ,"stairsup" , "pillar" , "", "animatevert",
+		 "" , "" , "" , "spikes" , "" , "" , "animatevert",
+		 "" , "" , "pillar" , "firelarge" , "pillar" , "" , "animatevert",
+		 "" , "" , "" , "" , "pillar" , "pillar" , "animatevert",
+		 "pillar" , "pillar" , "pillar" , "rock" , "pillar" , "hatstrength" , "hatjump",
+		 "pillar" , "wizardright" , "" , "" , "" , "" , "hatwater"
 		]
 	]; // end of levels
 
@@ -470,13 +497,13 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation % widthOfBoard == 0) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation - 1].className.includes("pillar") || gridBoxes[rockLocation - 1].className.includes("firelarge") || gridBoxes[rockLocation - 1].className.includes("spikes") || gridBoxes[rockLocation - 1].className.includes("stairs")) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
@@ -488,7 +515,7 @@ function moveRock (direction , rockLocation) {
 		currentLocation --;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "wizard" + direction;
+		gridBoxes[rockLocation].className = "strength" + direction;
 		
 		// update location of rock
 		rockLocation --;
@@ -502,13 +529,13 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation % widthOfBoard == widthOfBoard - 1) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation + 1].className.includes("pillar") || gridBoxes[rockLocation + 1].className.includes("firelarge") || gridBoxes[rockLocation + 1].className.includes("spikes") || gridBoxes[rockLocation + 1].className.includes("stairs")){ 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
@@ -520,7 +547,7 @@ function moveRock (direction , rockLocation) {
 		currentLocation ++;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "wizard" + direction;
+		gridBoxes[rockLocation].className = "strength" + direction;
 		
 		// update location of rock
 		rockLocation ++;
@@ -534,13 +561,13 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation - widthOfBoard < 0) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation - widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation - widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation - widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation - widthOfBoard].className.includes("stairs")) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
@@ -552,7 +579,7 @@ function moveRock (direction , rockLocation) {
 		currentLocation -= widthOfBoard;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "wizard" + direction;
+		gridBoxes[rockLocation].className = "strength" + direction;
 		
 		// update location of rock
 		rockLocation -= widthOfBoard;
@@ -566,13 +593,13 @@ function moveRock (direction , rockLocation) {
 		
 		// if out of bounds, don't move
 		if (rockLocation + widthOfBoard >= widthOfBoard * widthOfBoard) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			return; 
 		} // if
 		
 		// if the next location of the rock is an impassable object, don't move
 		if (gridBoxes[rockLocation + widthOfBoard].className.includes("pillar") || gridBoxes[rockLocation + widthOfBoard].className.includes("firelarge") || gridBoxes[rockLocation + widthOfBoard].className.includes("spikes") || gridBoxes[rockLocation + widthOfBoard].className.includes("stairs")) { 
-			gridBoxes[currentLocation].className = "wizard" + direction;
+			gridBoxes[currentLocation].className = "strength" + direction;
 			console.log("impassible"); 
 			return; 
 		} // if
@@ -584,7 +611,7 @@ function moveRock (direction , rockLocation) {
 		currentLocation += widthOfBoard;
 		
 		// remove old rock and replace it with the horse
-		gridBoxes[rockLocation].className = "wizard" + direction;
+		gridBoxes[rockLocation].className = "strength" + direction;
 		
 		// update location of rock
 		rockLocation += widthOfBoard;
